@@ -18,7 +18,7 @@ class CheckRegistrationNumber
     public function handle(Request $request, Closure $next)
     {
         if (!Helpers::checkRegistrationNumber($request->registrationNumber)){
-            abort(500);
+            abort(404);
         }
         return $next($request);
     }

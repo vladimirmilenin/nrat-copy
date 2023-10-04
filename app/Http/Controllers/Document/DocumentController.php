@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class DocumentController extends Controller
 {
     public function __invoke(Request $request){
+        $lang = app()->getLocale();
         $document = new Document($request->registrationNumber);
-        // $content = Helpers::getUrl('https://nrat.ukrintei.ua/uacademic/0423U100155');
-        // dd($content);
+        return view('pages.documents.' . $document->documentType, compact('document', 'lang'));
     }
 
 }

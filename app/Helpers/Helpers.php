@@ -4,8 +4,49 @@ namespace App\Helpers;
 
 use Illuminate\Support\Str;
 
-class Helpers{
+class Helpers {
 
+
+    public static function prepareThemeRelations(string $relations){
+        if (empty($relations)) return [];
+        foreach ($connections = explode("\n", $relations) as $key => &$item){
+            if (!empty($item = trim($item))){
+                $item = substr($item, 0, 11);
+            }
+            $connections[$key] = $item;
+        }
+        return $connections;
+    }
+
+    public static function preparePersonData(array $persons){
+        if (empty($persons)) return [];
+
+        $result = [];
+        if (!is_array($persons[array_key_first($persons)])){
+            $persons = [$persons];
+        }
+        foreach ($persons as $person){
+            $arr = [
+                'person_id' => $person['person_id'],
+                'full_name' => self::fullNameByLanguage($person['names'] ?? []),
+                'short_name' => self::shortNameByLanguage($person['names'] ?? []),
+            ];
+            array_push($result, $arr);
+        }
+        return $result;
+    }
+
+    public static function prepareFirmName(array $firm){
+        $edrpou = !empty($firm['edrpou']) ? $firm['edrpou'] . ' ' : '';
+        $edrpou = '';
+        return [
+            'ua' => $edrpou . $firm['firm_name'] ?? '',
+            'en' => $edrpou . $firm['firm_name_en'] ?? ''
+        ];
+    }
+    public static function prepareSpecialtyData(array $specialties){
+        return array_column($specialties, 'specialty_name', 'specialty_code');
+    }
     public static function descriptionsByTypes(array $descriptions){
         return array_column($descriptions, 'description', 'description_field');
     }
@@ -49,9 +90,11 @@ class Helpers{
     }
 
     public static function getUrl(string $url){
+
         $url = trim(preg_replace_callback('/[^\x20-\x7f]/', function($match){
             return urlencode($match[0]);
         }, $url));
+
         $agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

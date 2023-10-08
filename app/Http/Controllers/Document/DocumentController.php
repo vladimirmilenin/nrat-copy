@@ -12,6 +12,7 @@ class DocumentController extends Controller
     public function __invoke(Request $request){
         $lang = app()->getLocale();
         $document = new Document($request->registrationNumber);
+        // dd($document);
         return view('pages.documents.' . $document->documentType, compact('document', 'lang'));
     }
 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+
     @yield('meta')
     @yield('opengraph')
     @yield('schemaorg')
@@ -19,8 +21,8 @@
 
             <header class="py-2 mb-4 border-bottom">
                 <div class="container d-flex flex-wrap align-items-center  justify-content-center">
-                    <a href="/" class="mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                        <img src="{{ Vite::asset('resources/images/logo.png') }}">
+                    <a href="{{ route('index', ['lang' => app()->getLocale() ]) }}" class="mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                        <img src="{{ Vite::asset('resources/images/logo_' . app()->getLocale() . '.png') }}" alt="{{ __('app.app_title') }}">
                     </a>
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 align-middle">
                         <input type="search" class="form-control align-middle" placeholder="{{ __('app.placeholder_search') }}..." aria-label="Search">

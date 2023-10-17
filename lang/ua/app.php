@@ -2,8 +2,9 @@
 return [
 
     'app_title' => 'Академічні Тексти України',
-    'locale_version' => 'Англійська версія сайту',
+    'locale_version' => 'English version',
     'locale_version_code' => 'en',
+    'work_locale_version' => 'English version',
 
     'placeholder_search' => 'Пошук',
 
@@ -29,7 +30,14 @@ return [
     'caption_files' => 'Файли',
     'caption_file_okd' => 'Облікова картка дисертації',
     //connection with scientific topics
+    'caption_similar' => 'Схожі дисертації',
 
     'link_download' => 'Завантажити',
+
+    'meta_okd_keywords' => 'дисертація, повний текст, завантажити, дисертації :year, :author, :theme',
+    'meta_okd_og_title' => 'Дисертація: :theme',
+    'meta_okd_description' => 'Дисертація на тему: :theme',
+    'meta_okd_og_description' => 'Повний текст, анотація. Завантажити дисертацію у форматі PDF',
+    'meta_og_locale' => 'uk_UA',
 
 ];

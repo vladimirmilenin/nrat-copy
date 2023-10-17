@@ -1,16 +1,8 @@
 @extends('layouts.document')
 
-@section('meta')
-<meta name="description" content="{{ $document->document['addons']['descriptions']['theme_' . $lang] ?? '' }}">
-<meta name="keywords" content="">
-<meta name="author" content="{{ $document->document['addons']['author'][0]['short_name'][$lang] ?? '' }}">
-@endsection
-
-@section('opengraph')
-@endsection
-
-@section('schemaorg')
-@endsection
+@include('pages.documents.okd.meta')
+@include('pages.documents.okd.opengraph')
+@include('pages.documents.okd.schemaorg')
 
 @section('title')
 {{ $document->document['addons']['title'] ?? '' }}
@@ -20,6 +12,8 @@
 <div class="row g-5">
     <div class="col-md-7 col-lg-8">
         <h1>{{ $document->document['addons']['title'] ?? '' }}</h1>
+        <a class="d-block small mb-3" href="{{ route('document', ['lang' => __('app.locale_version_code'), 'registrationNumber' => $document->document['version']['registration_number'] ]) }}">{{ __('app.work_locale_version') }}</a>
+
         <p>{{ __('app.caption_okd_research_for') . __('app.caption_okd_type_research.' . ($document->document['version']['okd_type']) ?? 0) }}</p>
 
         <!-- state registration number -->
@@ -67,7 +61,7 @@
         </ul>
 
         <!-- date of defence  -->
-        @unless($document->document['version']['date_defense'])
+        @unless(empty($document->document['version']['date_defense']))
         <label class="h6">{{ __('app.caption_date_defense') }}</label>
         <p>{{ Carbon\Carbon::parse($document->document['version']['date_defense'] ?? 0)->format('d-m-Y') }}</p>
         @endunless
@@ -139,6 +133,30 @@
                 <li>{{ $item }}</li>
                 @endforeach
             </ul>
+        @endunless
+
+        <!-- similar -->
+        @unless(empty($document->document['similar']))
+        <label class="h6">{{ __('app.caption_similar') }}</label>
+        <ul>
+            @foreach ($document->document['similar'] as $okd)
+                @unless(empty($okd['registration_number']))
+                <li class="mb-1">
+                    <a href="{{ route('document', ['lang' => $lang, 'registrationNumber' => ($okd['registration_number'] ?? '') ]) }}">
+                        <span class="fw-bold">{{ $okd['registration_number'] ?? '' }}</span> {{ $okd['theme'][$lang] ?? '' }}
+                    </a>
+                </li>
+                @endunless
+            @endforeach
+        </ul>
+{{--
+            <dl class="row">
+                @foreach ($document->document['similar'] as $okd)
+                    <dt class="col-lg-3">{{ $okd['registration_number'] ?? '' }}</dt>
+                    <dd class="col-lg-9">{{ $okd['theme'][$lang] ?? '' }}</dd>
+                @endforeach
+            </dl>
+             --}}
         @endunless
 
 

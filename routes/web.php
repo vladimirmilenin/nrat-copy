@@ -15,12 +15,14 @@ Route::prefix('{lang}')
         // return 'home 2 ' . app()->getLocale();
     })->name('index');
 
-    Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber');
+    Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber')->name('document');
 
 });
 
+
 Route::get('/', function () {
-    abort(500);
+    return redirect()->route('index', ['lang' => 'ua']);
+    // abort(500);
     // return 'home 1 ' . app()->getLocale();
 });
 

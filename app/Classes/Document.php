@@ -10,6 +10,8 @@ class Document {
 
     use Cacheable;
 
+    const DOCUMENTS_ENDPOINT = 'https://nrat.ukrintei.ua/uacademic';
+
     const DOC_TYPES = [
         4 => 'okd',
         5 => 'okd',
@@ -19,8 +21,7 @@ class Document {
     const DOCUMENTS_CACHE_PATH = ['cache', 'documents'];
 
     public $registrationNumber;
-    public $original;
-    public $addons;
+    public $document;
     public $documentType;
 
 
@@ -31,13 +32,14 @@ class Document {
     public function __construct(string $registrationNumber){
         $this->lang = app()->getLocale();
         $this->registrationNumber = $registrationNumber;
-        $this->documentUrl = Str::finish(config('nrat.documents_endpoint'), '/') . $this->registrationNumber;
+
+        $this->documentUrl = Str::finish(self::DOCUMENTS_ENDPOINT, '/') . $this->registrationNumber;
         $this->cacheDestination = $this->makeCacheDestination();
         $this->documentType = self::DOC_TYPES[ (int)Helpers::getRegistrationNumberType($this->registrationNumber) ] ?? 'undefined';
 
-        $this->original = $this->getDocument();
+        $this->document = $this->getDocument();
 
-        if (empty($this->original)){
+        if (empty($this->document['version'])){
             abort(404);
         }
 
@@ -45,21 +47,20 @@ class Document {
     }
 
     private function prepareOkdData(){
-        $this->original['descriptions'] = Helpers::descriptionsByTypes($this->original['descriptions'] ?? []);
-        $this->addons['documentYear'] = $this->getRegistrationYear( $this->original['registration_date'] ?? 0 );
-        $this->addons = [
-            'documentYear' => $this->getRegistrationYear( $this->original['registration_date'] ?? 0 ),
-            'title' => ($addons['author']['short_name'][$this->lang] ?? '') . ' ' . $this->original['descriptions']['theme_' . $this->lang],
-            'author' => Helpers::preparePersonData($this->original['author'] ?? []),
-            'specialty' => Helpers::prepareSpecialtyData($this->original['okd_specialty'] ?? []),
-            'user_firm' => Helpers::prepareFirmName($this->original['user']['firm'] ?? []),
-            'heads' => Helpers::preparePersonData($this->original['heads'] ?? []),
-            'opponents' => Helpers::preparePersonData($this->original['opponents'] ?? []),
-            'reviewers' => Helpers::preparePersonData($this->original['reviews'] ?? []),
-            'advisors' => Helpers::preparePersonData($this->original['advisors'] ?? []),
-            // 'theme_relations' => Helpers::prepareThemeRelations($this->original['total']['okdTotal']['theme_relations'] ?? ''),
-        ];
 
+        $this->document['addons'] = [
+            'descriptions' => Helpers::descriptionsByTypes($this->document['version']['descriptions'] ?? []),
+            'documentYear' => $this->getRegistrationYear($this->document['version']['registration_date'] ?? 0),
+            'author' => Helpers::preparePersonData($this->document['version']['author'] ?? []),
+            'specialty' => Helpers::prepareSpecialtyData($this->document['version']['okd_specialty'] ?? []),
+            'user_firm' => Helpers::prepareFirmName($this->document['version']['user']['firm'] ?? []),
+            'heads' => Helpers::preparePersonData($this->document['version']['heads'] ?? []),
+            'opponents' => Helpers::preparePersonData($this->document['version']['opponents'] ?? []),
+            'reviewers' => Helpers::preparePersonData($this->document['version']['reviews'] ?? []),
+            'advisors' => Helpers::preparePersonData($this->document['version']['advisors'] ?? []),
+            'theme_relations' => Helpers::prepareThemeRelations($this->document['version']['total']['okdTotal']['theme_relations'] ?? ''),
+        ];
+        $this->document['addons']['title'] = ($this->document['addons']['author'][0]['short_name'][$this->lang] ?? '') . ' ' . $this->document['addons']['descriptions']['theme_' . $this->lang];
     }
 
     private function getNddkrData(){
@@ -85,7 +86,7 @@ class Document {
 
     private function getDocument(){
         $document = $this->getFromCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber);
-        if ($this->validationDoument($document)){
+        if ($this->validationDocument($document)){
             return $document;
         } else {
             return $this->getRemote();
@@ -95,7 +96,7 @@ class Document {
     private function getRemote(){
         $data = Helpers::getUrl($this->documentUrl);
         $document = json_decode($data, true);
-        if ($this->validationDoument($document)){
+        if ($this->validationDocument($document)){
             $this->setToCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber, $data);
             return $document;
         }
@@ -111,8 +112,8 @@ class Document {
         return $year;
     }
 
-    private function validationDoument(mixed $document){
-        return !empty($document['registration_number']);
+    private function validationDocument(mixed $document){
+        return !empty($document['version']['registration_number'] ?? null);
     }
 
 }

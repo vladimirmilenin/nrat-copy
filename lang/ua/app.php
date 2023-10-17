@@ -1,6 +1,10 @@
 <?php
 return [
 
+    'app_title' => 'Академічні Тексти України',
+    'locale_version' => 'Англійська версія сайту',
+    'locale_version_code' => 'en',
+
     'placeholder_search' => 'Пошук',
 
     'caption_okd_research_for' => 'Дисертація на здобуття ступеня ',

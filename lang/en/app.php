@@ -9,11 +9,11 @@ return [
 
     'placeholder_search' => 'Search',
 
-    'caption_okd_research_for' => 'Дисертація на здобуття ступеня ',
+    'caption_okd_research_for' => 'Thesis for the degree of ',
     'caption_okd_type_research' => [
-        4 => 'кандидата наук',
-        5 => 'доктора наук',
-        8 => 'доктора філософії',
+        4 => 'Candidate of Sciences (CSc)',
+        5 => 'Doctor of Science (DSc)',
+        8 => 'Doctor of Philosophy (PhD)',
     ],
 
     'caption_author' => 'Applicant for',

@@ -40,8 +40,8 @@ class Helpers {
         $edrpou = !empty($firm['edrpou']) ? $firm['edrpou'] . ' ' : '';
         $edrpou = '';
         return [
-            'ua' => $edrpou . $firm['firm_name'] ?? '',
-            'en' => $edrpou . $firm['firm_name_en'] ?? ''
+            'ua' => $edrpou . ($firm['firm_name'] ?? ''),
+            'en' => $edrpou . ($firm['firm_name_en'] ?? '')
         ];
     }
     public static function prepareSpecialtyData(array $specialties){

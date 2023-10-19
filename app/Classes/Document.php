@@ -23,6 +23,7 @@ class Document {
     public $registrationNumber;
     public $document;
     public $documentType;
+    public $documentVersionHash;
 
 
     private $documentUrl;
@@ -47,6 +48,7 @@ class Document {
     }
 
     private function prepareOkdData(){
+        $this->documentVersionHash = $this->document['version']['okd_hash'];
 
         $this->document['addons'] = [
             'descriptions' => Helpers::descriptionsByTypes($this->document['version']['descriptions'] ?? []),

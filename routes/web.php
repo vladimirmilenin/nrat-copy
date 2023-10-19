@@ -25,12 +25,13 @@ Route::get('/', function () {
     // return 'home 1 ' . app()->getLocale();
 });
 
-Route::prefix('download/{dir_type}')
-->whereIn('dir_type', ['okd'])
+Route::prefix('download')
 ->group(function(){
+
     Route::controller(FileDownloadController::class)
     ->group(function(){
-        Route::get('/card/{hash}/{filename}', 'downloadCard')->name('downloadCard');
+        Route::get('/card/{registrationNumber}', 'downloadCard')->name('downloadCard');
     });
+
 });
 

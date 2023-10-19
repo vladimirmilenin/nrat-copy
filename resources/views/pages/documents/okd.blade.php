@@ -30,7 +30,7 @@
         <label class="h6">{{ __('app.caption_files') }}</label>
         <ul>
             <li>
-                <a href="{{ route('downloadCard', ['dir_type' => 'okd', 'hash' => $document->document['version']['okd_hash'] ?? '', 'filename' => ($document->document['version']['registration_number'] ?? 'unknown') ]) . '.pdf' }}">
+                <a href="{{ route('downloadCard', ['registrationNumber' => ($document->document['version']['registration_number'] ?? '')]) }}">
                 {{ $document->document['version']['registration_number'] }}.pdf
                 </a>
             </li>

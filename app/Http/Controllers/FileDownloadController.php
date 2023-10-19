@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use Illuminate\Http\Request;
+use App\Classes\Document;
 
 class FileDownloadController extends Controller
 {
@@ -14,7 +15,11 @@ class FileDownloadController extends Controller
 
 
     public function downloadCard(Request $request){
-        $pdf = Helpers::getFile( self::CARD_DOWNLOAD_URL[$request->dir_type] . $request->hash);
+        $document = new Document($request->registrationNumber);
+
+        $url = self::CARD_DOWNLOAD_URL[ $document->documentType ?? 'unknown' ] . ($document->documentVersionHash ?? 'unknown');
+        $pdf = Helpers::getFile($url);
+        $fileName = ($document->registrationNumber ?? 'unknown') . '.pdf';
         if (!empty($pdf)){
             $headers = [
                 'Content-Type'        => 'application/pdf',
@@ -22,8 +27,9 @@ class FileDownloadController extends Controller
             ];
             return response()->streamDownload(function() use ($pdf){
                 echo $pdf;
-            }, ($request->filename ?? 'unknown.pdf'), $headers);
+            }, $fileName, $headers);
         }
+
         return back()->with('download_error', __('app.message_download_error'));
     }
 

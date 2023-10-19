@@ -3,8 +3,7 @@
 use App\Http\Controllers\Document\DocumentController;
 use App\Http\Controllers\FileDownloadController;
 use Illuminate\Support\Facades\Route;
-
-
+use Psy\VersionUpdater\Downloader\FileDownloader;
 
 Route::prefix('{lang}')
 ->whereIn('lang', ['ua', 'en'])
@@ -26,5 +25,12 @@ Route::get('/', function () {
     // return 'home 1 ' . app()->getLocale();
 });
 
-Route::get('/download/{filetype}/{filename}', FileDownloadController::class)->name('download');
+Route::prefix('download/{dir_type}')
+->whereIn('dir_type', ['okd'])
+->group(function(){
+    Route::controller(FileDownloadController::class)
+    ->group(function(){
+        Route::get('/card/{hash}/{filename}', 'downloadCard')->name('downloadCard');
+    });
+});
 

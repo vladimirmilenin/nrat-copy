@@ -41,5 +41,7 @@ return [
     'meta_okd_og_description' => 'Full text, abstract. Download the thesis at PDF',
     'meta_og_locale' => 'en_US',
 
+    'message_download_error' => 'There was an error while downloading this file',
+
 
 ];

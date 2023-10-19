@@ -40,4 +40,6 @@ return [
     'meta_okd_og_description' => 'Повний текст, анотація. Завантажити дисертацію у форматі PDF',
     'meta_og_locale' => 'uk_UA',
 
+    'message_download_error' => 'Сталася помилка під час завантаження цього файлу',
+
 ];

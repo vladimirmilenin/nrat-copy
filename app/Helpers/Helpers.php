@@ -90,7 +90,6 @@ class Helpers {
     }
 
     public static function getUrl(string $url){
-
         $url = trim(preg_replace_callback('/[^\x20-\x7f]/', function($match){
             return urlencode($match[0]);
         }, $url));
@@ -101,15 +100,27 @@ class Helpers {
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERAGENT, $agent);
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_ENCODING , "gzip");
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_ENCODING , "gzip");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_REFERER, $url);
         curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
         curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
+
         $content = curl_exec($ch);
+        if (!curl_errno($ch)) {
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if ($http_code != 200){
+                $content = null;
+            }
+        }
+
         curl_close($ch);
         return $content;
+    }
+
+    public static function getFile(string $url){
+        return self::getUrl($url);
     }
 
 }

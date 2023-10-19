@@ -9,6 +9,8 @@
 @endsection
 
 @section('content')
+
+
 <div class="row g-5">
     <div class="col-md-7 col-lg-8">
         <h1>{{ $document->document['addons']['title'] ?? '' }}</h1>
@@ -21,13 +23,18 @@
         <p>{{ $document->document['version']['registration_number'] }}</p>
 
         <!-- files -->
+        @if (session('download_error'))
+            <div class="alert alert-danger">{{ session('download_error') }}</div>
+        @endif
+
         <label class="h6">{{ __('app.caption_files') }}</label>
         <ul>
             <li>
-                <a href="{{ route('download', ['filetype' => 'card.okd', 'filename' => $document->document['version']['okd_hash']]) }}" target="_blank">
+                <a href="{{ route('downloadCard', ['dir_type' => 'okd', 'hash' => $document->document['version']['okd_hash'] ?? '', 'filename' => ($document->document['version']['registration_number'] ?? 'unknown') ]) . '.pdf' }}">
                 {{ $document->document['version']['registration_number'] }}.pdf
                 </a>
             </li>
+{{--
             @foreach ($document->document['version']['files']['autoreferat'] ?? [] as $file)
             <li>
                 <a href="{{ route('download', ['filetype' => 'okd', 'filename' => $file['file_hash']]) }}" target="_blank">
@@ -42,6 +49,7 @@
                 </a>
             </li>
             @endforeach
+             --}}
         </ul>
 
         <!-- applicant for -->

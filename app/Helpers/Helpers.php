@@ -122,7 +122,7 @@ class Helpers {
     }
 
     public static function urlEncode(string $url){
-        return trim(preg_replace_callback('/[^\x20-\x7f]/', function($match){
+        return trim(preg_replace_callback('/[^\x21-\x7f]/', function($match){
             return urlencode($match[0]);
         }, $url));
     }

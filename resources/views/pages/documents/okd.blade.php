@@ -27,29 +27,13 @@
             <div class="alert alert-danger">{{ session('download_error') }}</div>
         @endif
 
-        <label class="h6">{{ __('app.caption_files') }}</label>
+        <label class="h6">{{ __('app.caption_file_okd') }}</label>
         <ul>
             <li>
                 <a href="{{ route('downloadCard', ['registrationNumber' => ($document->document['version']['registration_number'] ?? '')]) }}">
                 {{ $document->document['version']['registration_number'] }}.pdf
                 </a>
             </li>
-{{--
-            @foreach ($document->document['version']['files']['autoreferat'] ?? [] as $file)
-            <li>
-                <a href="{{ route('download', ['filetype' => 'okd', 'filename' => $file['file_hash']]) }}" target="_blank">
-                {{ $file['file_name'] }}
-                </a>
-            </li>
-            @endforeach
-            @foreach ($document->document['version']['files']['diser'] ?? [] as $file)
-            <li>
-                <a href="{{ route('download', ['filetype' => 'okd', 'filename' => $file['file_hash']]) }}" target="_blank">
-                {{ $file['file_name'] }}
-                </a>
-            </li>
-            @endforeach
-             --}}
         </ul>
 
         <!-- applicant for -->
@@ -143,6 +127,20 @@
             </ul>
         @endunless
 
+        @unless(empty($document->document['files']))
+        <label class="h6">{{ __('app.caption_files') }}</label>
+        <ul>
+            @foreach ($document->document['files'] ?? [] as $file)
+            <li>
+                <a href="{{ route('downloadFile', ['registrationNumber' => ($document->document['version']['registration_number'] ?? ''), 'filename' => $file]) }}" target="_blank">
+                {{ $file }}
+                </a>
+            </li>
+            @endforeach
+        </ul>
+        @endunless
+
+
         <!-- similar -->
         @unless(empty($document->document['similar']))
         <label class="h6">{{ __('app.caption_similar') }}</label>
@@ -157,14 +155,6 @@
                 @endunless
             @endforeach
         </ul>
-{{--
-            <dl class="row">
-                @foreach ($document->document['similar'] as $okd)
-                    <dt class="col-lg-3">{{ $okd['registration_number'] ?? '' }}</dt>
-                    <dd class="col-lg-9">{{ $okd['theme'][$lang] ?? '' }}</dd>
-                @endforeach
-            </dl>
-             --}}
         @endunless
 
 

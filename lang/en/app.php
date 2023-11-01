@@ -29,7 +29,7 @@ return [
     'caption_connection' => 'Connection with scientific topics',
     'caption_biblos' => 'Research papers',
     'caption_files' => 'Files',
-    'caption_file_okd' => 'Облікова картка дисертації',
+    'caption_file_okd' => 'Thesis Registration Form',
     //connection with scientific topics
     'caption_similar' => 'Similar theses',
 

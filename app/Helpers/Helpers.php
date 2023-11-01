@@ -90,9 +90,7 @@ class Helpers {
     }
 
     public static function getUrl(string $url){
-        $url = trim(preg_replace_callback('/[^\x20-\x7f]/', function($match){
-            return urlencode($match[0]);
-        }, $url));
+        $url = self::urlEncode($url);
 
         $agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
         $ch = curl_init();
@@ -121,6 +119,12 @@ class Helpers {
 
     public static function getFile(string $url){
         return self::getUrl($url);
+    }
+
+    public static function urlEncode(string $url){
+        return trim(preg_replace_callback('/[^\x20-\x7f]/', function($match){
+            return urlencode($match[0]);
+        }, $url));
     }
 
 }

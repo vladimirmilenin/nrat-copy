@@ -10,7 +10,8 @@ Route::prefix('{lang}')
 ->group(function(){
 
     Route::get('/', function(){
-        abort(500);
+
+        abort(404);
         // return 'home 2 ' . app()->getLocale();
     })->name('index');
 
@@ -31,6 +32,7 @@ Route::prefix('download')
     Route::controller(FileDownloadController::class)
     ->group(function(){
         Route::get('/card/{registrationNumber}', 'downloadCard')->name('downloadCard');
+        Route::get('/file/{registrationNumber}/{filename}', 'downloadFile')->name('downloadFile');
     });
 
 });

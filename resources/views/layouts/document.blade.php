@@ -8,6 +8,7 @@
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
+    @yield('canonical')
     @yield('meta')
     @yield('opengraph')
     @yield('schemaorg')

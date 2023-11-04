@@ -43,8 +43,8 @@
                     </form>
                 </div>
             </header>
-            @yield('content')
         </div>
+        @yield('content')
     </main>
 
 

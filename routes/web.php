@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Document\DocumentController;
 use App\Http\Controllers\FileDownloadController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use Psy\VersionUpdater\Downloader\FileDownloader;
 
@@ -9,9 +10,7 @@ Route::prefix('{lang}')
 ->whereIn('lang', ['ua', 'en'])
 ->group(function(){
 
-    Route::get('/', function(){
-        return view('index');
-    })->name('index');
+    Route::get('/', IndexController::class)->name('index');
 
     Route::get('/search', function(){
         return view('pages.search');

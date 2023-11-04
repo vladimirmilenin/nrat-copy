@@ -1,5 +1,10 @@
 @extends('layouts.document')
 
+@section('canonical')
+<link rel="canonical" href="{{ route('document', ['lang' => $lang, 'registrationNumber' => $document->document['version']['registration_number']]) }}" />
+@endsection
+
+
 @include('pages.documents.okd.meta')
 @include('pages.documents.okd.opengraph')
 @include('pages.documents.okd.schemaorg')
@@ -19,25 +24,32 @@
         <p>{{ __('app.caption_okd_research_for') . __('app.caption_okd_type_research.' . ($document->document['version']['okd_type']) ?? 0) }}</p>
 
         <!-- state registration number -->
-        <label class="h6">{{ __('app.caption_registration_number') }}</label>
-        <p>{{ $document->document['version']['registration_number'] }}</p>
+        <h2 class="h6 mb-1">{{ __('app.caption_registration_number') }}</h2>
+        <p class="opacity-75">{{ $document->document['version']['registration_number'] }}</p>
 
         <!-- files -->
         @if (session('download_error'))
             <div class="alert alert-danger">{{ session('download_error') }}</div>
         @endif
 
-        <label class="h6">{{ __('app.caption_file_okd') }}</label>
-        <ul>
-            <li>
-                <a href="{{ route('downloadCard', ['registrationNumber' => ($document->document['version']['registration_number'] ?? '')]) }}">
-                {{ $document->document['version']['registration_number'] }}.pdf
-                </a>
-            </li>
-        </ul>
+
+
+        <div class="list-group mb-4">
+            <a href="{{ route('downloadCard', ['registrationNumber' => ($document->document['version']['registration_number'] ?? '')]) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <x-bi-file-earmark-pdf class="w-8 h-8 text-danger"/>
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <h2 class="h6 mb-0">{{ __('app.caption_file_okd') }}</h2>
+                        <p class="mb-0 opacity-75">{{ $document->document['version']['registration_number'] }}.pdf</p>
+                    </div>
+                    <small class="opacity-75 text-nowrap"><x-bi-download /></small>
+                </div>
+            </a>
+        </div>
+
 
         <!-- applicant for -->
-        <label class="h6">{{ __('app.caption_author') }}</label>
+        <h2 class="h6 mb-1">{{ __('app.caption_author') }}</h2>
         <ul class="list-unstyled">
         @foreach ($document->document['addons']['author'] as $person)
             <li><a href="#!">{{ $person['full_name'][$lang] }}</a></li>
@@ -45,8 +57,8 @@
         </ul>
 
         <!-- specialization -->
-        <label class="h6">{{ __('app.caption_speciality') }}</label>
-        <ul class="list-unstyled">
+        <h2 class="h6 mb-1">{{ __('app.caption_speciality') }}</h2>
+        <ul class="list-unstyled opacity-75">
         @foreach ($document->document['addons']['specialty'] as $key => $spec)
             <li>{{ $key }} - {{ $spec }}</li>
         @endforeach
@@ -54,24 +66,24 @@
 
         <!-- date of defence  -->
         @unless(empty($document->document['version']['date_defense']))
-        <label class="h6">{{ __('app.caption_date_defense') }}</label>
-        <p>{{ Carbon\Carbon::parse($document->document['version']['date_defense'] ?? 0)->format('d-m-Y') }}</p>
+        <label class="h6 mb-1">{{ __('app.caption_date_defense') }}</label>
+        <p class="opacity-75">{{ Carbon\Carbon::parse($document->document['version']['date_defense'] ?? 0)->format('d-m-Y') }}</p>
         @endunless
 
         <!-- specialized academic board -->
-        <label class="h6">{{ __('app.caption_spec') }}</label>
-        <p class="mb-0">{{ $document->document['version']['user']['user_number'] }}</p>
+        <h2 class="h6 mb-1">{{ __('app.caption_spec') }}</h2>
+        <p class="mb-0 opacity-75">{{ $document->document['version']['user']['user_number'] }}</p>
         @if (!empty($document->document['addons']['user_firm'][$lang]))
-        <p>{{ $document->document['addons']['user_firm'][$lang] }}</p>
+        <p class="opacity-75">{{ $document->document['addons']['user_firm'][$lang] }}</p>
         @endif
 
         <!-- essay -->
-        <label class="h6">{{ __('app.caption_essay') }}</label>
-        <p>{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
+        <h2 class="h6 mb-1">{{ __('app.caption_essay') }}</h2>
+        <p class="opacity-75">{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
 
         <!-- thesis supervisor -->
         @unless(empty($document->document['addons']['heads']))
-            <label class="h6">{{ __('app.caption_supervisor') }}</label>
+            <label class="h6 mb-1">{{ __('app.caption_supervisor') }}</label>
             <ul class="list-unstyled">
             @foreach ($document->document['addons']['heads'] as $person)
                 <li><a href="#!">{{ $person['full_name'][$lang] }}</a></li>
@@ -81,7 +93,7 @@
 
         <!-- official opponents -->
         @unless(empty($document->document['addons']['opponents']))
-            <label class="h6">{{ __('app.caption_opponents') }}</label>
+            <label class="h6 mb-1">{{ __('app.caption_opponents') }}</label>
             <ul class="list-unstyled">
             @foreach ($document->document['addons']['opponents'] as $person)
                 <li><a href="#!">{{ $person['full_name'][$lang] }}</a></li>
@@ -91,7 +103,7 @@
 
         <!--  reviewers -->
         @unless(empty($document->document['addons']['reviewers']))
-            <label class="h6">{{ __('app.caption_reviewers') }}</label>
+            <label class="h6 mb-1">{{ __('app.caption_reviewers') }}</label>
             <ul class="list-unstyled">
             @foreach ($document->document['addons']['reviewers'] as $person)
                 <li><a href="#!">{{ $person['full_name'][$lang] }}</a></li>
@@ -101,7 +113,7 @@
 
         <!--  advisors -->
         @unless(empty($document->document['addons']['advisors']))
-            <label class="h6">{{ __('app.caption_advisors') }}</label>
+            <label class="h6 mb-1">{{ __('app.caption_advisors') }}</label>
             <ul class="list-unstyled">
                 @foreach ($document->document['addons']['advisors'] as $person)
                 <li><a href="#!">{{ $person['full_name'][$lang] }}</a></li>
@@ -119,42 +131,55 @@
 
         <!-- biblos -->
         @unless(empty($document->document['version']['total']['okdTotal']['biblos']))
-            <label class="h6">{{ __('app.caption_biblos') }}</label>
-            <ul>
+            <h2 class="h6 mt-4 mb-1">{{ __('app.caption_biblos') }}</h2>
+            {{-- <label class="h6">{{ __('app.caption_biblos') }}</label> --}}
+
+            <div class="list-group mb-4 list-group-flush">
                 @foreach ($document->document['version']['total']['okdTotal']['biblos'] as $item)
-                <li>{{ $item }}</li>
+                <div  @class(['list-group-item py-3 px-0', 'pt-1' => $loop->first])>
+                            <p class="mb-0 opacity-75">{{ $item }}</p>
+                </div>
                 @endforeach
-            </ul>
+            </div>
+
         @endunless
 
         @unless(empty($document->document['files']))
-        <label class="h6">{{ __('app.caption_files') }}</label>
-        <ul>
+        <h2 class="h6 mb-2">{{ __('app.caption_files') }}</h2>
+        <div class="list-group mb-4">
             @foreach ($document->document['files'] ?? [] as $file)
-            <li>
-                <a href="{{ route('downloadFile', ['registrationNumber' => ($document->document['version']['registration_number'] ?? ''), 'filename' => $file]) }}" target="_blank">
-                {{ $file }}
-                </a>
-            </li>
+            <a href="{{ route('downloadFile', ['registrationNumber' => ($document->document['version']['registration_number'] ?? ''), 'filename' => $file]) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" target="_blank">
+                <x-bi-file-earmark-pdf class="w-8 h-8 text-danger"/>
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <p class="mb-0 opacity-75">{{ $file }}</p>
+                    </div>
+                    <small class="opacity-75 text-nowrap"><x-bi-download /></small>
+                </div>
+            </a>
             @endforeach
-        </ul>
+        </div>
         @endunless
 
 
         <!-- similar -->
         @unless(empty($document->document['similar']))
-        <label class="h6">{{ __('app.caption_similar') }}</label>
-        <ul>
+        <h2 class="h6 mt-5 mb-2">{{ __('app.caption_similar') }}</h2>
+        <div class="list-group mb-4">
             @foreach ($document->document['similar'] as $okd)
                 @unless(empty($okd['registration_number']))
-                <li class="mb-1">
-                    <a href="{{ route('document', ['lang' => $lang, 'registrationNumber' => ($okd['registration_number'] ?? '') ]) }}">
-                        <span class="fw-bold">{{ $okd['registration_number'] ?? '' }}</span> {{ $okd['theme'][$lang] ?? '' }}
-                    </a>
-                </li>
+                <a href="{{ route('document', ['lang' => $lang, 'registrationNumber' => ($okd['registration_number'] ?? '') ]) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" target="_blank">
+                    <x-bi-link-45deg class="w-8 h-8 text-primary opacity-75"/>
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h2 class="h6 mb-0">{{ $okd['registration_number'] ?? '' }}</h2>
+                            <p class="mb-0 opacity-75">{{ $okd['theme'][$lang] ?? '' }}</p>
+                        </div>
+                    </div>
+                </a>
                 @endunless
             @endforeach
-        </ul>
+        </div>
         @endunless
 
 

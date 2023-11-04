@@ -44,4 +44,16 @@ return [
     'message_download_error' => 'There was an error while downloading this file',
 
 
+    //Common
+    'common_title' => 'Academic texts of Ukraine: theses, reports, articles, monographs',
+    'common_keywords' => 'thesis, full text, abstract, theses :year, academic texts, download thesis, thesis abstract, topic, scientific reports, monographs, scientific texts, uacademic',
+    'common_description' => 'Search of academic texts of Ukraine: full texts of theses, abstracts, reports, monographs. Access to scientific works for scientists and researchers',
+
+    '404_subheader' => 'Page not found',
+    '404_text' => 'Most likely, this page has been moved or deleted.<br>Maybe you made a mistake when entering the address. Please check it again.',
+    '404_text_2' => 'You can return to the home page of the site or find what you need using the search.',
+
+    'button_home' => 'Home',
+    'button_search' => 'Search',
+
 ];

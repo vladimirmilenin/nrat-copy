@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() == 'ua' ? 'uk' : 'en' }}">
+<html lang="{{ app()->getLocale() == 'ua' ? 'uk' : 'en' }}" class="h-100">
 <head>
 
     <meta charset="UTF-8">
@@ -8,13 +8,13 @@
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
-    @yield('meta')
-    @yield('opengraph')
-    @yield('schemaorg')
+    <meta name="description" content="{{  __('app.common_description') }}">
+    <meta name="keywords" content="{{ __('app.common_keywords', ['year' => ($document->document['addons']['documentYear'] ?? '')]) }}">
+
 
     @vite('resources/css/app.scss')
 
-    <title>@yield("title")</title>
+    <title>{{ __('app.common_title') }}</title>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEM99EH898"></script>
@@ -27,12 +27,14 @@
     </script>
 
 </head>
-<body>
-    <div class="container">
-        <main>
 
+<body class="d-flex flex-column justify-content-between h-100">
+
+    <!-- Begin page content -->
+    <main>
+        <div class="container">
             <header class="py-2 mb-4 border-bottom">
-                <div class="container d-flex flex-wrap align-items-center  justify-content-center">
+                <div class="d-flex flex-wrap align-items-center  justify-content-center">
                     <a href="{{ route('index', ['lang' => app()->getLocale() ]) }}" class="mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
                         <img src="{{ Vite::asset('resources/images/logo_' . app()->getLocale() . '.webp') }}" alt="{{ __('app.app_title') }}" width="297" height="82">
                     </a>
@@ -41,21 +43,20 @@
                     </form>
                 </div>
             </header>
-
             @yield('content')
-        </main>
-
-        <footer class="my-5 pt-5 text-muted text-center text-small ua-border">
-            <p class="mb-1">© {{ Carbon\Carbon::today()->year }} {{ __('app.app_title') }}</p>
-            <ul class="list-inline small">
-                <li class="list-inline-item"><a href="{{ route('index', ['lang' => __('app.locale_version_code')]) }}">{{ __('app.locale_version') }}</a></li>
-            </ul>
-        </footer>
-    </div>
+        </div>
+    </main>
 
 
+    <footer class="page-footer text-muted text-center text-small">
+        <div class="container ua-border my-5 pt-5 ">
+        <p class="mb-1">© {{ Carbon\Carbon::today()->year }} {{ __('app.app_title') }}</p>
+        <ul class="list-inline small">
+            <li class="list-inline-item"><a href="{{ route('index', ['lang' => __('app.locale_version_code')]) }}">{{ __('app.locale_version') }}</a></li>
+        </ul>
+        </div>
+    </footer>
 
-    @vite('resources/js/app.js')
-    @stack('extrascripts')
 </body>
+
 </html>

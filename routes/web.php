@@ -10,10 +10,12 @@ Route::prefix('{lang}')
 ->group(function(){
 
     Route::get('/', function(){
-
-        abort(404);
-        // return 'home 2 ' . app()->getLocale();
+        return view('index');
     })->name('index');
+
+    Route::get('/search', function(){
+        return view('pages.search');
+    })->name('search');
 
     Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber')->name('document');
 
@@ -22,8 +24,6 @@ Route::prefix('{lang}')
 
 Route::get('/', function () {
     return redirect()->route('index', ['lang' => 'ua']);
-    // abort(500);
-    // return 'home 1 ' . app()->getLocale();
 });
 
 Route::prefix('download')

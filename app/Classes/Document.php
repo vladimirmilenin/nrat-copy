@@ -2,15 +2,10 @@
 namespace App\Classes;
 
 use App\Helpers\Helpers;
-use App\Traits\Cacheable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class Document {
-
-    use Cacheable;
-
-    const DOCUMENTS_ENDPOINT = 'https://nrat.ukrintei.ua/uacademic';
 
     const DOC_TYPES = [
         4 => 'okd',
@@ -18,7 +13,7 @@ class Document {
         8 => 'okd',
     ];
 
-    const DOCUMENTS_CACHE_PATH = ['cache', 'documents'];
+    const CACHE_PATH = ['cache', 'documents'];
 
     public $registrationNumber;
     public $document;
@@ -34,7 +29,7 @@ class Document {
         $this->lang = app()->getLocale();
         $this->registrationNumber = $registrationNumber;
 
-        $this->documentUrl = Str::finish(self::DOCUMENTS_ENDPOINT, '/') . $this->registrationNumber;
+        $this->documentUrl = Str::finish( config('nrat.endpoints.documents') , '/') . $this->registrationNumber;
         $this->cacheDestination = $this->makeCacheDestination();
         $this->documentType = self::DOC_TYPES[ (int)Helpers::getRegistrationNumberType($this->registrationNumber) ] ?? 'undefined';
 
@@ -74,7 +69,7 @@ class Document {
 
     private function makeCacheDestination(){
         return DIRECTORY_SEPARATOR
-            . implode(DIRECTORY_SEPARATOR, self::DOCUMENTS_CACHE_PATH)
+            . implode(DIRECTORY_SEPARATOR, self::CACHE_PATH)
             . DIRECTORY_SEPARATOR
             . implode(DIRECTORY_SEPARATOR,
                     [
@@ -87,7 +82,7 @@ class Document {
 
 
     private function getDocument(){
-        $document = $this->getFromCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber);
+        $document = Helpers::getFromCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber);
         if ($this->validationDocument($document)){
             return $document;
         } else {
@@ -99,7 +94,7 @@ class Document {
         $data = Helpers::getUrl($this->documentUrl);
         $document = json_decode($data, true);
         if ($this->validationDocument($document)){
-            $this->setToCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber, $data);
+            Helpers::setToCache($this->cacheDestination . DIRECTORY_SEPARATOR . $this->registrationNumber, $data);
             return $document;
         }
         return null;

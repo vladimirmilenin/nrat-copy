@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class Helpers {
 
@@ -70,7 +71,6 @@ class Helpers {
         return $result;
     }
 
-
     public static function getRegistrationNumberType(string $registrationNumber){
         return Str::substr($registrationNumber, 0, 2);
     }
@@ -125,6 +125,14 @@ class Helpers {
         return trim(preg_replace_callback('/[^\x21-\x7f]/', function($match){
             return urlencode($match[0]);
         }, $url));
+    }
+
+    public static function setToCache(string $src, string $data){
+        Storage::put($src, $data);
+    }
+
+    public static function getFromCache(string $src){
+        return Storage::json($src);
     }
 
 }

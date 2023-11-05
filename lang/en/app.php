@@ -54,6 +54,13 @@ return [
     '404_text_2' => 'You can return to the home page of the site or find what you need using the search.',
 
     'button_home' => 'Home',
-    'button_search' => 'Search',
+    'button_search' => 'Got to search',
+
+    //Index
+    'index_welcome_header' => 'Hello scientists!',
+    'index_text_1' => 'Welcome to our site where you can find full texts of academic papers for your research. Our powerful search will provide the most accurate results for your search queries.',
+    'index_text_2' => 'Together we will reach new heights in the scientific world!',
+
+    'index_last_diser' => 'Latest theses',
 
 ];

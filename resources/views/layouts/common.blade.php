@@ -12,6 +12,15 @@
     <meta name="keywords" content="{{ __('app.common_keywords', ['year' => ($document->document['addons']['documentYear'] ?? '')]) }}">
 
 
+    <meta property="og:url" content="{{ Request::url() }}">
+    <meta property="og:description" content="{{  __('app.common_description') }}">
+    <meta property="og:locale" content="{{ __('app.meta_og_locale') }}">
+    <meta property="og:site_name" content="{{ __('app.app_title') }}">
+    <meta property="og:image" content="{{ Vite::asset('resources/images/atu_' . app()->getLocale() . '.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+
     @vite('resources/css/app.scss')
 
     <title>{{ __('app.common_title') }}</title>
@@ -33,17 +42,9 @@
     <!-- Begin page content -->
     <main>
         <div class="container">
-            <header class="py-2 mb-4 border-bottom">
-                <div class="d-flex flex-wrap align-items-center  justify-content-center">
-                    <a href="{{ route('index', ['lang' => app()->getLocale() ]) }}" class="mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                        <img src="{{ Vite::asset('resources/images/logo_' . app()->getLocale() . '.webp') }}" alt="{{ __('app.app_title') }}" width="297" height="82">
-                    </a>
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 align-middle">
-                        <input type="search" class="form-control align-middle" placeholder="{{ __('app.placeholder_search') }}..." aria-label="Search">
-                    </form>
-                </div>
-            </header>
+            @include('templates.header')
         </div>
+
         @yield('content')
     </main>
 

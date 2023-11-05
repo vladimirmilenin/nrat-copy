@@ -79,7 +79,7 @@
 
         <!-- essay -->
         <h2 class="h6 mb-1">{{ __('app.caption_essay') }}</h2>
-        <p class="opacity-75">{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
+        <p class="opacity-75 overflow-x-hidden">{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
 
         <!-- thesis supervisor -->
         @unless(empty($document->document['addons']['heads']))
@@ -136,7 +136,7 @@
 
             <div class="list-group mb-4 list-group-flush">
                 @foreach ($document->document['version']['total']['okdTotal']['biblos'] as $item)
-                <div  @class(['list-group-item py-3 px-0', 'pt-1' => $loop->first])>
+                <div  @class(['list-group-item py-3 px-0 overflow-x-hidden', 'pt-1' => $loop->first])>
                             <p class="mb-0 opacity-75">{{ $item }}</p>
                 </div>
                 @endforeach
@@ -152,7 +152,7 @@
                 <x-bi-file-earmark-pdf class="w-8 h-8 text-danger"/>
                 <div class="d-flex gap-2 w-100 justify-content-between">
                     <div>
-                        <p class="mb-0 opacity-75">{{ $file }}</p>
+                        <p class="mb-0 opacity-75 overflow-x-hidden">{{ $file }}</p>
                     </div>
                     <small class="opacity-75 text-nowrap"><x-bi-download /></small>
                 </div>
@@ -167,17 +167,12 @@
         <h2 class="h6 mt-5 mb-2">{{ __('app.caption_similar') }}</h2>
         <div class="list-group mb-4">
             @foreach ($document->document['similar'] as $okd)
-                @unless(empty($okd['registration_number']))
-                <a href="{{ route('document', ['lang' => $lang, 'registrationNumber' => ($okd['registration_number'] ?? '') ]) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" target="_blank">
-                    <x-bi-link-45deg class="w-8 h-8 text-primary opacity-75"/>
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h2 class="h6 mb-0">{{ $okd['registration_number'] ?? '' }}</h2>
-                            <p class="mb-0 opacity-75">{{ $okd['theme'][$lang] ?? '' }}</p>
-                        </div>
-                    </div>
-                </a>
-                @endunless
+                <x-okd-list-item
+                    registrationNumber="{{ $okd['registration_number'] ?? '' }}"
+                    url="{{ route('document', ['lang' => $lang, 'registrationNumber' => ($okd['registration_number'] ?? '') ]) }}"
+                    author="{{ $okd['author'][$lang] ?? '' }}"
+                    theme="{{ $okd['theme'][$lang] ?? '' }}"
+                />
             @endforeach
         </div>
         @endunless

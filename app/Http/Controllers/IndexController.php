@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Latest;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -9,6 +10,12 @@ class IndexController extends Controller
 
 
     public function __invoke(Request $request){
-        return view('index');
+        $lang = app()->getLocale();
+        $latest = new Latest(5);
+        $latestOkd = $latest->getLatestOkd();
+        // dd($latestOkd);
+        return view('index', compact('latestOkd', 'lang'));
     }
+
+
 }

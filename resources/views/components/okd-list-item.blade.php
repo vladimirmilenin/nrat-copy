@@ -7,7 +7,7 @@
             @unless (empty($author))
             <p class="mb-0 overflow-x-hidden">{{ $author }}</p>
             @endunless
-            <p class="mb-0 opacity-75 overflow-x-hidden">{{ $theme }}</p>
+            <p class="mb-0 opacity-75 overflow-x-hidden">{!! $theme !!}</p>
         </div>
     </div>
 </a>

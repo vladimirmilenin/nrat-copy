@@ -20,10 +20,8 @@ Route::prefix('{lang}')
 
 });
 
+Route::get('/', IndexController::class)->name('home');
 
-Route::get('/', function () {
-    return redirect()->route('index', ['lang' => 'ua']);
-});
 
 Route::prefix('download')
 ->group(function(){

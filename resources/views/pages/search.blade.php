@@ -1,6 +1,14 @@
 @extends('layouts.common')
 
 
+@section('description')
+<meta name="description" content="{{  __('app.common_description') }}">
+<meta name="keywords" content="{{ __('app.common_keywords', ['year' => ($document->document['addons']['documentYear'] ?? '')]) }}">
+@endsection
+
+@section('title')
+{{ __('app.search_title') }}
+@endsection
 
 @section('content')
 

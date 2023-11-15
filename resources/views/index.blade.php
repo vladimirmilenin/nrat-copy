@@ -1,6 +1,19 @@
 @extends('layouts.common')
 
 
+@section('canonical')
+<link rel="canonical" href="{{ route('index', ['lang' => $lang ]) }}" />
+@endsection
+
+@section('description')
+<meta name="description" content="{{  __('app.common_description') }}">
+<meta name="keywords" content="{{ __('app.common_keywords', ['year' => ($document->document['addons']['documentYear'] ?? '')]) }}">
+@endsection
+
+@section('title')
+{{ __('app.common_title') }}
+@endsection
+
 
 @section('content')
 

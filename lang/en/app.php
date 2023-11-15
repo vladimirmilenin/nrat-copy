@@ -45,7 +45,7 @@ return [
 
 
     //Common
-    'common_title' => 'Academic texts of Ukraine: theses, reports, articles, monographs',
+    'common_title' => 'Academic texts of Ukraine: theses, reports, articles, monographs - uacademic.info',
     'common_keywords' => 'thesis, full text, abstract, theses :year, academic texts, download thesis, thesis abstract, topic, scientific reports, monographs, scientific texts, uacademic',
     'common_description' => 'Search of academic texts of Ukraine: full texts of theses, abstracts, reports, monographs. Access to scientific works for scientists and researchers',
 
@@ -60,7 +60,8 @@ return [
     'index_welcome_header' => 'Hello scientists!',
     'index_text_1' => 'Welcome to our site where you can find full texts of academic papers for your research. Our powerful search will provide the most accurate results for your search queries.',
     'index_text_2' => 'Together we will reach new heights in the scientific world!',
-
     'index_last_diser' => 'Latest theses',
 
+    //Search
+    'search_title' => 'Academic texts of Ukraine: advanced search - uacademic.info',
 ];

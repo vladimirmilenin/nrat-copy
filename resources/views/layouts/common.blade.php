@@ -8,8 +8,8 @@
 
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
-    <meta name="description" content="{{  __('app.common_description') }}">
-    <meta name="keywords" content="{{ __('app.common_keywords', ['year' => ($document->document['addons']['documentYear'] ?? '')]) }}">
+    @yield('canonical')
+    @yield('description')
 
 
     <meta property="og:url" content="{{ Request::url() }}">
@@ -23,7 +23,8 @@
 
     @vite('resources/css/app.scss')
 
-    <title>{{ __('app.common_title') }}</title>
+
+    <title>@yield("title")</title>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEM99EH898"></script>

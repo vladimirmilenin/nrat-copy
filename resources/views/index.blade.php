@@ -23,7 +23,7 @@
         <div class="container-fluid py-4">
             <h1 class="display-5 fw-bold">{{ __('app.index_welcome_header') }}</h1>
             <div class="col-md-10">
-                <p class="fs-5">{{ __('app.index_text_1') }}</p>
+                {!! __('app.index_text_1') !!}
                 <p class="fs-5">{{ __('app.index_text_2') }}</p>
             </div>
             <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a>

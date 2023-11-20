@@ -38,3 +38,21 @@ footer::before {
     width: 100%;
     height: auto;
 }
+
+
+.expanded-block {
+    height: 20vh;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5vh;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+

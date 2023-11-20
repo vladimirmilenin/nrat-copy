@@ -79,7 +79,15 @@
 
         <!-- essay -->
         <h2 class="h6 mb-1">{{ __('app.caption_essay') }}</h2>
-        <p class="opacity-75 overflow-x-hidden">{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
+        <div class="read-more">
+            <div class="expanded-block">
+                <p class="opacity-75 overflow-x-hidden">{{ $document->document['addons']['descriptions']['referat_' . $lang] ?? '' }}</p>
+                <div class="gradient-overlay"></div>
+            </div>
+            <div class="mb-4 mt-1">
+                <a href="#!" class="link-primary text-decoration-none read-more-link">{{ __('app.botton_read_more') }}</a>
+            </div>
+        </div>
 
         <!-- thesis supervisor -->
         @unless(empty($document->document['addons']['heads']))
@@ -133,13 +141,20 @@
         @unless(empty($document->document['version']['total']['okdTotal']['biblos']))
             <h2 class="h6 mt-4 mb-1">{{ __('app.caption_biblos') }}</h2>
             {{-- <label class="h6">{{ __('app.caption_biblos') }}</label> --}}
-
-            <div class="list-group mb-4 list-group-flush">
-                @foreach ($document->document['version']['total']['okdTotal']['biblos'] as $item)
-                <div  @class(['list-group-item py-3 px-0 overflow-x-hidden', 'pt-1' => $loop->first])>
-                            <p class="mb-0 opacity-75">{{ $item }}</p>
+            <div class="read-more">
+                <div class="expanded-block">
+                    <div class="list-group mb-4 list-group-flush">
+                        @foreach ($document->document['version']['total']['okdTotal']['biblos'] as $item)
+                        <div  @class(['list-group-item py-3 px-0 overflow-x-hidden', 'pt-1' => $loop->first])>
+                                    <p class="mb-0 opacity-75">{{ $item }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="gradient-overlay"></div>
                 </div>
-                @endforeach
+                <div class="mb-4 mt-1">
+                    <a href="#!" class="link-primary text-decoration-none read-more-link">{{ __('app.botton_read_more') }}</a>
+                </div>
             </div>
 
         @endunless
@@ -187,6 +202,9 @@
 
 
 @push('extrascripts')
+<script type="module">
+</script>
+
 @endpush
 
 

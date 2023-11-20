@@ -55,6 +55,7 @@ return [
 
     'button_home' => 'Home',
     'button_search' => 'Got to search',
+    'botton_read_more' => 'Read more',
 
     //Index
     'index_welcome_header' => 'Hello scientists!',

@@ -1,10 +1,22 @@
 import * as Popper from '@popperjs/core';
 window.Popper = Popper;
+
 import 'bootstrap';
 
-// import $ from 'jquery';
-// window.$ = $;
+import jQuery from 'jquery';
+window.jQuery = window.$ = jQuery;
 
+import './modules/readmore';
+
+$(window).on('load', function(){
+    $('.read-more').readMore();
+});
+
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+    // init lightslider
+// }, false);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

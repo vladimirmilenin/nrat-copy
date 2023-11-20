@@ -46,6 +46,7 @@
 
 
     @vite('resources/js/app.js')
+
     @stack('extrascripts')
 </body>
 </html>

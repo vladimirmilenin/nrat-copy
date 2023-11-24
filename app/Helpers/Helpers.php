@@ -135,4 +135,9 @@ class Helpers {
         return Storage::json($src);
     }
 
+    public static function strClean(string $str){
+        $str = preg_replace('/\xA0/u', ' ', $str);
+        return $str;
+    }
+
 }

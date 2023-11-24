@@ -57,7 +57,7 @@ class Document {
             'advisors' => Helpers::preparePersonData($this->document['version']['advisors'] ?? []),
             'theme_relations' => Helpers::prepareThemeRelations($this->document['version']['total']['okdTotal']['theme_relations'] ?? ''),
         ];
-        $this->document['addons']['title'] = ($this->document['addons']['author'][0]['short_name'][$this->lang] ?? '') . ' ' . $this->document['addons']['descriptions']['theme_' . $this->lang];
+        $this->document['addons']['title'] = Helpers::strClean(($this->document['addons']['author'][0]['short_name'][$this->lang] ?? '') . ' ' . $this->document['addons']['descriptions']['theme_' . $this->lang]);
     }
 
     private function getNddkrData(){

@@ -12,6 +12,10 @@ $(window).on('load', function(){
     $('.read-more').readMore();
 });
 
+import Cookies from 'js-cookie';
+window.Cookies = Cookies;
+
+
 
 
 // document.addEventListener('DOMContentLoaded', function () {

@@ -65,4 +65,29 @@ return [
 
     //Search
     'search_title' => 'Академічні тексти України: розширений пошук - uacademic.info',
+    'search_heading_formalized' => 'Формалізований пошук',
+    'search_heading_advanced' => 'Пошук з уточненням',
+
+    //Not translated
+    'search_label_document_type' => 'Тип документів',
+    'search_document_types' => [
+        'all' => 'Всі',
+        'okd' => 'Дисертації',
+        'ok' => 'Звіти з НДДКР',
+    ],
+    'search_label_person_name' => 'Прізвище, ім\'я',
+    'search_label_theme' => 'Назва / опис документа',
+    'search_label_content' => 'Зміст повного тексту',
+    'search_label_regno' => 'Реєстраційний номер',
+    'search_label_date_from' => 'Дата реєстрації з',
+    'search_label_date_to' => 'Дата реєстрації до',
+    'search_label_sort' => 'Сортування',
+    'search_sort_types' => [
+        'registration_date' => 'За датою реєстрації',
+        'author' => 'За прізвищем',
+        'score' => 'За відповідністю',
+    ],
+    'search_label_search_text' => 'Текст для пошуку',
+    'search_button_search' => 'Шукати',
+
 ];

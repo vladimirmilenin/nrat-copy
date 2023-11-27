@@ -19,6 +19,7 @@
 
 
 <div class="container">
+
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-4">
             <h1 class="display-5 fw-bold">{{ __('app.index_welcome_header') }}</h1>
@@ -30,9 +31,9 @@
         </div>
     </div>
 
-    <div class="row align-items-md-stretch">
+    <div class="row">
         <div class="col-md-7 col-lg-8">
-            <div class="container-fluid">
+            <div>
                 <h2 class="h3 mb-3">{{ __('app.index_last_diser') }}</h2>
 
                 @unless(empty($latestOkd))
@@ -50,9 +51,8 @@
 
             </div>
         </div>
-        <div class="col-md-5 col-lg-4 order-md-last">
 
-        </div>
+        @include('templates.aside')
     </div>
 
 </div>

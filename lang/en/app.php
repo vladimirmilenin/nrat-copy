@@ -65,4 +65,8 @@ return [
 
     //Search
     'search_title' => 'Academic texts of Ukraine: advanced search - uacademic.info',
+    'search_heading_formalized' => 'Formalized search',
+    'search_heading_advanced' => 'Advanced search',
+
+
 ];

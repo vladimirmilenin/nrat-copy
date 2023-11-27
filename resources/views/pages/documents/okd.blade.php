@@ -15,8 +15,8 @@
 
 @section('content')
 
-
-<div class="row g-5">
+<div class="container">
+<div class="row">
     <div class="col-md-7 col-lg-8">
         <h1>{{ $document->document['addons']['title'] ?? '' }}</h1>
         <a class="d-block small mb-3" href="{{ route('document', ['lang' => __('app.locale_version_code'), 'registrationNumber' => $document->document['version']['registration_number'] ]) }}">{{ __('app.work_locale_version') }}</a>
@@ -194,9 +194,10 @@
 
 
     </div>
-    <div class="col-md-5 col-lg-4 order-md-last">
-        {{-- {{ app()->getLocale() }} --}}
-    </div>
+
+    @include('templates.aside')
+
+</div>
 </div>
 @endsection
 

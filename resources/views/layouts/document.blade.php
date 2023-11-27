@@ -22,24 +22,22 @@
 </head>
 <body>
 
-    <div class="container">
-        <main>
+    <main>
+        <div class="container">
             @include('templates.header')
-            @yield('content')
-        </main>
+        </div>
 
-        <footer class="my-5 pt-5 text-muted text-center text-small ua-border">
-            <p class="mb-1">© {{ Carbon\Carbon::today()->year }} {{ __('app.app_title') }}</p>
-            <ul class="list-inline small">
-                <li class="list-inline-item"><a href="{{ route('index', ['lang' => __('app.locale_version_code')]) }}">{{ __('app.locale_version') }}</a></li>
-            </ul>
-        </footer>
-    </div>
+        @yield('content')
+    </main>
 
+    @include('templates.footer')
 
 
     @vite('resources/js/app.js')
-
     @stack('extrascripts')
+
+    {{-- @vite('resources/js/app.js') --}}
+
+    {{-- @stack('extrascripts') --}}
 </body>
 </html>

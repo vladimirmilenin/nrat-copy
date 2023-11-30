@@ -181,4 +181,13 @@ return [
 
     'attributes' => [],
 
+    'customMessages' => [
+        'Author.min' => 'The field must be at least :min characters',
+        'Theme.min' => 'The field must be at least :min characters',
+        'Content.min' => 'The field must be at least :min characters',
+        'RegNo.regex' => 'Incorrect registration number format',
+        'Complex.min' => 'The field must be at least :min characters',
+        'Filter.*.required' => 'The field is required.',
+    ],
+
 ];

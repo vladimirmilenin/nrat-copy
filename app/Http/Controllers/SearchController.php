@@ -120,7 +120,6 @@ class SearchController extends Controller
 
         $page = $request->input('pa', 1);
         $params = [
-            // 'index' => 'elastic/uacademic',
             'index' => env('ELASTICSEARCH_INDEX', 'elastic/uacademic'),
             'body' => [
                 'query' => [

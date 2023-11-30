@@ -115,7 +115,7 @@
                     </h2>
                     <div id="panelAdvancedSearch" @class(["accordion-collapse collapse", 'show' => Cookie::has('panelAdvancedSearch')]) aria-labelledby="panelAdvancedSearch-open">
                         <div class="accordion-body px-0">
-                            <form method="GET" id="advancedSearchForm">
+                            <form method="GET" id="advancedSearchForm" data-submit-allowed="0">
                                 @csrf
                                 <input type="hidden" name="sortOrder" value="score">
                                 @foreach ((old('searchFilter') ?? $fill['searchFilter'] ?? []) as $step)
@@ -124,7 +124,7 @@
                                         <input type="text" readonly class="form-control bg-secondary bg-opacity-10" name="searchFilter[]" value="{{ $step }}">
                                         <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
                                     @else
-                                        <input type="text" @readonly(!$loop->last) @class(['form-control', 'bg-secondary bg-opacity-10' => !$loop->last, 'is-invalid' => $loop->last]) name="searchFilter[]" value="{{ $step }}">
+                                        <input type="text" @readonly(!$loop->last) @if($loop->last) id="lastField" @endif @class(['form-control', 'bg-secondary bg-opacity-10' => !$loop->last, 'is-invalid' => $loop->last]) name="searchFilter[]" value="{{ $step }}">
                                         @if ($loop->index <= $loop->count - 2)
                                         <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
                                         @endif
@@ -139,7 +139,7 @@
 
                                 @unless ($errors->has("Filter.*"))
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="searchFilter[]" value="">
+                                    <input type="text" class="form-control" id="lastField" name="searchFilter[]" value="">
                                 </div>
                                 @endunless
 

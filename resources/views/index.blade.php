@@ -2,7 +2,11 @@
 
 
 @section('canonical')
-<link rel="canonical" href="{{ route('index', ['lang' => $lang ]) }}" />
+@if($lang == 'ua')
+    <link rel="canonical" href="{{ route('home') }}" />
+@else
+    <link rel="canonical" href="{{ route('index', ['lang' => $lang ]) }}" />
+@endif
 @endsection
 
 @section('description')

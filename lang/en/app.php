@@ -68,5 +68,27 @@ return [
     'search_heading_formalized' => 'Formalized search',
     'search_heading_advanced' => 'Advanced search',
 
+    'search_label_document_type' => 'Document type',
+    'search_document_types' => [
+        'all' => 'All',
+        'okd' => 'Theses',
+        'ok' => 'Scientific reports',
+    ],
+    'search_label_person_name' => 'Last name, name / full name',
+    'search_label_theme' => 'Document title / document description',
+    'search_label_content' => 'Full text',
+    'search_label_regno' => 'Registration number',
+    'search_label_date_from' => 'Registration date, from',
+    'search_label_date_to' => 'Registration date, to',
+    'search_label_sort' => 'Sort by',
+    'search_sort_types' => [
+        'score' => 'Rate',
+        'registration_date' => 'Registration date',
+        'author' => 'Person name',
+    ],
+
+    'search_label_search_text' => 'Search text',
+    'search_button_search' => 'Search',
+    'search_button_clear' => 'Clear search form',
 
 ];

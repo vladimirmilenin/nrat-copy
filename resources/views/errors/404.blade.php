@@ -11,7 +11,8 @@
         <p class="lead mb-4">{{ __('app.404_text_2') }}</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a class="btn btn-secondary btn-lg px-4 gap-3" href="{{ route('index', ['lang' => app()->getLocale()]) }}">{{ __('app.button_home') }}</a>
-            <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('search', ['lang' => app()->getLocale()]) }}">{{ __('app.button_search') }}</a>
+            <a class="btn btn-outline-secondary btn-lg px-4" href="#!">{{ __('app.button_search') }}</a>
+            {{-- <a class="btn btn-outline-secondary btn-lg px-4" href="{{ route('search', ['lang' => app()->getLocale()]) }}">{{ __('app.button_search') }}</a> --}}
         </div>
     </div>
 </div>

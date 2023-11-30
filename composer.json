@@ -9,6 +9,7 @@
         "blade-ui-kit/blade-icons": "^1.5",
         "blade-ui-kit/blade-ui-kit": "^0.4.0",
         "davidhsianturi/blade-bootstrap-icons": "^1.4",
+        "elasticsearch/elasticsearch": "^8.11",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
@@ -60,7 +61,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",

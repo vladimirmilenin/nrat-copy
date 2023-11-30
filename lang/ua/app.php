@@ -68,7 +68,6 @@ return [
     'search_heading_formalized' => 'Формалізований пошук',
     'search_heading_advanced' => 'Пошук з уточненням',
 
-    //Not translated
     'search_label_document_type' => 'Тип документів',
     'search_document_types' => [
         'all' => 'Всі',
@@ -89,5 +88,6 @@ return [
     ],
     'search_label_search_text' => 'Текст для пошуку',
     'search_button_search' => 'Шукати',
+    'search_button_clear' => 'Очистити форму пошуку',
 
 ];

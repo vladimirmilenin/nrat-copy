@@ -13,9 +13,10 @@ $(function(){
 });
 
 $(function(){
-    $('#searchDateFrom, #searchDateTo').on('change', function(){
-	    const dFrom = $('#searchDateFrom');
-	    const dTo = $('#searchDateTo');
+    const dFrom = $('#searchDateFrom');
+    const dTo = $('#searchDateTo');
+
+    function setDateRange(){
 	    if (dFrom.val()){
             dTo.attr('min', dFrom.val());
         } else {
@@ -26,5 +27,19 @@ $(function(){
         } else {
 	        dFrom.removeAttr('max');
         }
+    }
+    setDateRange();
+    $('#searchDateFrom, #searchDateTo').on('change', function(){
+        setDateRange();
     });
 });
+
+
+$(function () {
+    $('.remove-input').on('click', function () {
+        $(this).parent().remove();
+        $('#advancedSubmitButton').trigger('click');
+    });
+});
+
+

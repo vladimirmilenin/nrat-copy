@@ -93,6 +93,14 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'elasticsearch' => [
+            'driver' => 'elasticsearch',
+            'hosts' => [
+                env('ELASTICSEARCH_SCHEME', 'http') . '://' . env('ELASTICSEARCH_HOST', 'localhost') . ':' . env('ELASTICSEARCH_PORT', 9200)
+            ],
+        ],
+
+
     ],
 
     /*

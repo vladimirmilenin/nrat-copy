@@ -24,7 +24,7 @@
         </div>
     </a> --}}
 
-    <a href="{{ route('document', ['lang' => app()->getLocale(), 'registrationNumber' => $item['_source']['registration_number']]) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3 mb-3" aria-current="true">
+    <a href="{{ route('document', ['lang' => app()->getLocale(), 'registrationNumber' => $item['_source']['registration_number']]) }}" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3 mb-3" aria-current="true">
         <div>
             <x-bi-link-45deg class="w-8 h-8 text-primary opacity-75"/>
         </div>

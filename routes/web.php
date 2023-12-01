@@ -13,10 +13,7 @@ Route::prefix('{lang}')
 
     Route::get('/', IndexController::class)->name('index');
 
-    Route::get('/search', function(){
-        return view('pages.search');
-    })->name('search');
-
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
     // Route::get('/foo', [SearchController::class, 'index'])->name('search');
 
     Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber')->name('document');

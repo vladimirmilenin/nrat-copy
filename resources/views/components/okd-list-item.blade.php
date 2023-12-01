@@ -5,7 +5,7 @@
         <div>
             <h3 class="h6 mb-0">{{ $registrationNumber }}</h3>
             @unless (empty($author))
-            <p class="mb-0 overflow-x-hidden">{{ $author }}</p>
+            <p class="mb-0 overflow-x-hidden">{!! $author !!}</p>
             @endunless
             <p class="mb-0 opacity-75 overflow-x-hidden">{!! $theme !!}</p>
         </div>

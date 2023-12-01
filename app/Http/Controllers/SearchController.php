@@ -13,8 +13,9 @@ class SearchController extends Controller
 
 	const SEARCH_ITEM = "##search##";
 	const SEARCH_LEVEL_ITEM = "##level##";
-	const PER_PAGE = 5;
-    const VIEW = 'pages.foo';
+	const PER_PAGE = 100;
+    const VIEW = 'pages.search';
+    const PAGE = '/search';
 
 
     private $clearForm;
@@ -179,7 +180,7 @@ class SearchController extends Controller
                 $total = 1000;
                 $limited = true;
             }
-            $data = new LengthAwarePaginator($response['hits']['hits'], $total, self::PER_PAGE, $page, ['query' => $request->all(), 'path' => '/' . app()->getLocale() . '/foo', 'pageName' => 'pa']);
+            $data = new LengthAwarePaginator($response['hits']['hits'], $total, self::PER_PAGE, $page, ['query' => $request->all(), 'path' => '/' . app()->getLocale() . self::PAGE, 'pageName' => 'pa']);
             return view(self::VIEW, compact('data', 'total', 'fill', 'limited'));
         } else {
             return view(self::VIEW, ['fill' => $this->clearForm]);

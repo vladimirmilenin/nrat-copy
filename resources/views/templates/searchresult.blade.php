@@ -1,6 +1,5 @@
 <div class="row" id="searchResults">
     <div class="col">
-
     @if(!empty($fill['btnSearch']))
         <div class="row">
             <div class="col">

@@ -13,13 +13,11 @@ Route::prefix('{lang}')
 
     Route::get('/', IndexController::class)->name('index');
 
-    /*
     Route::get('/search', function(){
         return view('pages.search');
     })->name('search');
-    */
 
-    Route::get('/foo', [SearchController::class, 'index'])->name('search');
+    // Route::get('/foo', [SearchController::class, 'index'])->name('search');
 
     Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber')->name('document');
 
@@ -37,8 +35,8 @@ Route::prefix('download')
 });
 
 /* Redirect with lang */
-Route::get('/foo', function(){
-    return redirect()->route('foo', ['lang' => 'ua']);
+Route::get('/search', function(){
+    return redirect()->route('search', ['lang' => 'ua']);
 });
 
 

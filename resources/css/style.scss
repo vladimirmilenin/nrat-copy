@@ -55,6 +55,12 @@ footer::before {
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
 }
 
+.highlight{
+    font-weight: 500;
+    color: #000;
+    background-color: yellow;
+}
+
 #aside {
     img {
         width: 100%;

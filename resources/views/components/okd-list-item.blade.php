@@ -3,7 +3,7 @@
     <x-bi-link-45deg class="w-8 h-8 text-primary opacity-75"/>
     <div class="d-flex gap-2 w-100 justify-content-between">
         <div>
-            <h2 class="h6 mb-0">{{ $registrationNumber }}</h2>
+            <h3 class="h6 mb-0">{{ $registrationNumber }}</h3>
             @unless (empty($author))
             <p class="mb-0 overflow-x-hidden">{{ $author }}</p>
             @endunless

@@ -31,8 +31,8 @@
                 {!! __('app.index_text_1') !!}
                 <p class="fs-5">{{ __('app.index_text_2') }}</p>
             </div>
-            {{-- <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a> --}}
-            <a href="#!" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a>
+            <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a>
+            {{-- <a href="#!" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a> --}}
         </div>
     </div>
 

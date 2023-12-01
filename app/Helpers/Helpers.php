@@ -140,4 +140,17 @@ class Helpers {
         return $str;
     }
 
+    public static function getItemFromArray($items, $filters, $field){
+        foreach ($items as $item) {
+            $found = true;
+            foreach ($filters as $key=>$value) {
+                $found = $found && (($item[$key] ?? false) == $value);
+            }
+            if ($found) {
+                return $item[$field] ?? '';
+            }
+        }
+        return '';
+    }
+
 }

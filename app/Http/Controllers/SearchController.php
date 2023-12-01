@@ -162,10 +162,12 @@ class SearchController extends Controller
         /************************************************************************************************
          ************************************************************************************************
          */
+        /*
         $data = '';
         $total = 10;
         $limited = false;
         return view(self::VIEW, compact('data', 'total', 'fill', 'limited'));
+        */
         /***** */
 
 
@@ -177,8 +179,7 @@ class SearchController extends Controller
                 $total = 1000;
                 $limited = true;
             }
-            $data = new LengthAwarePaginator($response['hits']['hits'], $total, self::PER_PAGE, $page, ['query' => $request->all(), 'path' => '/search', 'pageName' => 'pa']);
-            // dd($data);
+            $data = new LengthAwarePaginator($response['hits']['hits'], $total, self::PER_PAGE, $page, ['query' => $request->all(), 'path' => '/' . app()->getLocale() . '/foo', 'pageName' => 'pa']);
             return view(self::VIEW, compact('data', 'total', 'fill', 'limited'));
         } else {
             return view(self::VIEW, ['fill' => $this->clearForm]);
@@ -250,6 +251,7 @@ class SearchController extends Controller
                                         'query' => [
                                             'bool' => [
                                                 'should' => [
+                                                    /*
                                                     [
                                                         'fuzzy' => [
                                                             'persons.person_names.name_full' => [
@@ -260,6 +262,7 @@ class SearchController extends Controller
                                                             ]
                                                         ]
                                                     ],
+                                                    */
                                                     [
                                                         'match_phrase_prefix' => [
                                                             'persons.person_names.name_full' => [

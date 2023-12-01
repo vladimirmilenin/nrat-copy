@@ -15,5 +15,9 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
-
+    'showing' => 'Showed ',
+    'to' => 'to',
+    'of' => 'from',
+    'results' => 'items',
+    'showing_string' => ':from to :to of :of items are shown',
 ];

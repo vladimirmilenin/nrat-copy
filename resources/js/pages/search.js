@@ -34,8 +34,7 @@ $(function(){
     });
 });
 
-
-$(function () {
+$(function(){
     const $advancedSearchForm = $('#advancedSearchForm');
 
     $('.remove-input').on('click', function () {
@@ -49,8 +48,17 @@ $(function () {
             e.preventDefault();
         }
     });
+});
 
-
+$(function(){
+    if ($("#isBtnSearch").val()){
+        $('html').animate(
+            {
+                scrollTop: $("#searchResults").offset().top,
+            },
+            500
+        );
+    }
 });
 
 

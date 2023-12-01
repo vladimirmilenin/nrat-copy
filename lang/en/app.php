@@ -89,6 +89,17 @@ return [
 
     'search_label_search_text' => 'Search text',
     'search_button_search' => 'Search',
-    'search_button_clear' => 'Clear search form',
+    'search_button_clear' => 'Reset form',
+
+    'search_result_header' => 'Search result',
+    'search_result_total' => '{1} :value item found|[2,*] :value items found',
+    'search_no_result' => 'Nothing found',
+    'search_limited' => 'The number of results is limited. Refine your search query',
+
+    'fields' => [
+        'persons.person_names.name_full' => 'Scientists',
+        'full_texts.full_text' => 'Full text',
+        'description.description_text' => 'Document title, essay',
+    ]
 
 ];

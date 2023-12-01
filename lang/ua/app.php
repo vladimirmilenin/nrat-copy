@@ -88,6 +88,19 @@ return [
     ],
     'search_label_search_text' => 'Текст для пошуку',
     'search_button_search' => 'Шукати',
-    'search_button_clear' => 'Очистити форму пошуку',
+    'search_button_clear' => 'Очистити форму',
+
+    'search_result_header' => 'Результати пошуку',
+    'search_result_total' => '{1} Знайдено :value запис|[2,4] Знайдено :value записи||[5,9] Знайдено :value записів|{0} Знайдено :value записів',
+    'search_no_result' => 'Нічого не знайдено',
+    'search_limited' => 'Кількість результатів обмежена. Уточніть пошукові дані',
+
+    'fields' => [
+        'persons.person_names.name_full' => 'Науковці',
+        'full_texts.full_text' => 'Повний текст',
+        'description.description_text' => 'Назва, реферат/анотація',
+    ]
+
+
 
 ];

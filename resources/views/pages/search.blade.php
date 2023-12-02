@@ -25,6 +25,54 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="formTabContent">
+                        <div @class(["tab-pane fade", "show active" => Cookie::has('panelAdvancedSearch')]) id="advanced-tab" role="tabpanel" aria-labelledby="panelAdvancedSearch">
+                            <form method="GET" id="advancedSearchForm" data-submit-allowed="0">
+                                @csrf
+                                <input type="hidden" name="sortOrder" value="score">
+                                <input type="hidden" name="searchType" value="okd">
+
+                                @foreach ((old('searchFilter') ?? $fill['searchFilter'] ?? []) as $step)
+                                <div class="input-group mb-3">
+                                    @if (!$errors->has("Filter.*"))
+                                        <input type="text" readonly class="form-control bg-secondary bg-opacity-10" name="searchFilter[]" value="{{ $step }}">
+                                        <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
+                                    @else
+                                        <input type="text" @readonly(!$loop->last) @if($loop->last) id="lastField" @endif @class(['form-control', 'bg-secondary bg-opacity-10' => !$loop->last, 'is-invalid' => $loop->last]) name="searchFilter[]" value="{{ $step }}">
+                                        @if ($loop->index <= $loop->count - 2)
+                                        <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
+                                        @endif
+                                        @if ($loop->last)
+                                            @error("Filter.*")
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        @endif
+                                    @endif
+                                </div>
+                                @endforeach
+
+                                @unless ($errors->has("Filter.*"))
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="lastField" name="searchFilter[]" value="">
+                                </div>
+                                @endunless
+
+                                <div id="formButtons">
+                                    <div class="row g-md-2">
+                                        <div class="col-md mb-3 order-md-last">
+                                            <div class="form-floating d-grid">
+                                                <button class="btn btn-primary btn-lg" type="submit" id="advancedSubmitButton" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md mb-3">
+                                            <div class="form-floating d-grid">
+                                                <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary btn-lg" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
                         <div @class(["tab-pane fade", "show active" => Cookie::has('panelFormalizedSearch')]) id="formalized-tab" role="tabpanel" aria-labelledby="panelFormalizedSearch">
                             <form method="GET" id="formalizedSearchForm">
                                 @csrf
@@ -59,7 +107,7 @@
                                 <div class="form-floating mb-3">
                                     <select class="form-select" name="searchType" id="searchType">
                                         @foreach (__('app.search_document_types') as $key => $type)
-                                            <option value="{{ $key }}" @selected((old('searchType') ?? $fill['searchType'] ?? 'ok') == $key)>{{ $type }}</option>
+                                            <option value="{{ $key }}" @selected((old('searchType') ?? $fill['searchType'] ?? 'okd') == $key)>{{ $type }}</option>
                                         @endforeach
                                     </select>
                                     <label for="searchType">{{ __('app.search_label_document_type') }}</label>
@@ -106,52 +154,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div @class(["tab-pane fade", "show active" => Cookie::has('panelAdvancedSearch')]) id="advanced-tab" role="tabpanel" aria-labelledby="panelAdvancedSearch">
-                            <form method="GET" id="advancedSearchForm" data-submit-allowed="0">
-                                @csrf
-                                <input type="hidden" name="sortOrder" value="score">
-                                @foreach ((old('searchFilter') ?? $fill['searchFilter'] ?? []) as $step)
-                                <div class="input-group mb-3">
-                                    @if (!$errors->has("Filter.*"))
-                                        <input type="text" readonly class="form-control bg-secondary bg-opacity-10" name="searchFilter[]" value="{{ $step }}">
-                                        <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
-                                    @else
-                                        <input type="text" @readonly(!$loop->last) @if($loop->last) id="lastField" @endif @class(['form-control', 'bg-secondary bg-opacity-10' => !$loop->last, 'is-invalid' => $loop->last]) name="searchFilter[]" value="{{ $step }}">
-                                        @if ($loop->index <= $loop->count - 2)
-                                        <button class="btn btn-outline-secondary remove-input" type="button"><x-bi-x class="w-6 h-6"/></button>
-                                        @endif
-                                        @if ($loop->last)
-                                            @error("Filter.*")
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        @endif
-                                    @endif
-                                </div>
-                                @endforeach
 
-                                @unless ($errors->has("Filter.*"))
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="lastField" name="searchFilter[]" value="">
-                                </div>
-                                @endunless
-
-                                <div id="formButtons">
-                                    <div class="row g-md-2">
-                                        <div class="col-md mb-3 order-md-last">
-                                            <div class="form-floating d-grid">
-                                                <button class="btn btn-primary btn-lg" type="submit" id="advancedSubmitButton" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md mb-3">
-                                            <div class="form-floating d-grid">
-                                                <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary btn-lg" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
                     </div>
             </div><!-- tabContainer -->
 

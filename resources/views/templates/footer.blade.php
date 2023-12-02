@@ -8,3 +8,17 @@
         </div>
     </div>
 </footer>
+
+
+
+
+<!-- Scroll to Top Button -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <x-bi-arrow-up-circle-fill class="w-6 h-6" />
+</a>
+
+
+
+@vite('resources/js/app.js')
+@stack('extrascripts')
+

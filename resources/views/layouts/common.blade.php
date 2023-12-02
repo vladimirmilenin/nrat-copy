@@ -31,7 +31,7 @@
 
 </head>
 
-<body class="d-flex flex-column justify-content-between h-100">
+<body class="d-flex flex-column justify-content-between h-100" id="page-top">
 
 
     <!-- Begin page content -->
@@ -45,11 +45,5 @@
 
 
     @include('templates.footer')
-
-
-    @vite('resources/js/app.js')
-    @stack('extrascripts')
-
-
 </body>
 </html>

@@ -37,7 +37,6 @@
                 @include('templates.mainsearch')
             </div>
 
-            {{-- <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a> --}}
         </div>
     </div>
 

@@ -20,7 +20,7 @@
     @include('templates.googletag')
 
 </head>
-<body>
+<body id="page-top">
 
     <main>
         <div class="container">
@@ -30,14 +30,7 @@
         @yield('content')
     </main>
 
+
     @include('templates.footer')
-
-
-    @vite('resources/js/app.js')
-    @stack('extrascripts')
-
-    {{-- @vite('resources/js/app.js') --}}
-
-    {{-- @stack('extrascripts') --}}
 </body>
 </html>

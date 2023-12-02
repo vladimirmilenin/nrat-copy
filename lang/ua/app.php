@@ -70,9 +70,9 @@ return [
 
     'search_label_document_type' => 'Тип документів',
     'search_document_types' => [
-        'all' => 'Всі',
+        // 'all' => 'Всі',
         'okd' => 'Дисертації',
-        'ok' => 'Звіти з НДДКР',
+        // 'ok' => 'Звіти з НДДКР',
     ],
     'search_label_person_name' => 'Прізвище, ім\'я',
     'search_label_theme' => 'Назва / опис документа',

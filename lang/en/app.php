@@ -70,9 +70,9 @@ return [
 
     'search_label_document_type' => 'Document type',
     'search_document_types' => [
-        'all' => 'All',
+        // 'all' => 'All',
         'okd' => 'Theses',
-        'ok' => 'Scientific reports',
+        // 'ok' => 'Scientific reports',
     ],
     'search_label_person_name' => 'Last name, name / full name',
     'search_label_theme' => 'Document title / document description',

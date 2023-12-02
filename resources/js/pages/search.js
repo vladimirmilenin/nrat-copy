@@ -1,15 +1,28 @@
 $(function(){
     if (Cookies.get('panelFormalizedSearch') == undefined && Cookies.get('panelAdvancedSearch') == undefined){
         Cookies.set('panelFormalizedSearch', '1');
-        $('#panelFormalizedSearch').addClass('show');
-        $('#panelFormalizedSearch-open button').removeClass('collapsed');
+        $('#panelFormalizedSearch, #formalized-tab').addClass('active');
+        $('#formalized-tab').addClass('show');
     }
-    $("#accordionSearchPanels .accordion-collapse").on('shown.bs.collapse', function () {
+
+    $('#tabContainer button[data-bs-toggle="tab"]').on('shown.bs.tab', function(){
         Cookies.set($(this).attr('id'), '1');
+        if ($(this).attr('id') == 'panelAdvancedSearch'){
+            setAdvancedControls();
+        }
     });
-    $("#accordionSearchPanels .accordion-collapse").on('hidden.bs.collapse', function () {
+    $('#tabContainer button[data-bs-toggle="tab"]').on('hidden.bs.tab', function(){
         Cookies.remove($(this).attr('id'));
     });
+
+
+    if (Cookies.get('panelAdvancedSearch') == 1){
+        setAdvancedControls();
+    }
+    function setAdvancedControls(){
+        $('#lastField').trigger('focus');
+    }
+
 });
 
 $(function(){
@@ -34,6 +47,7 @@ $(function(){
     });
 });
 
+
 $(function(){
     const $advancedSearchForm = $('#advancedSearchForm');
 
@@ -50,8 +64,9 @@ $(function(){
     });
 });
 
+
 $(function(){
-    if ($("#isBtnSearch").val()){
+    if ($("#isBtnSearch").val() == 1){
         $('html').animate(
             {
                 scrollTop: $("#searchResults").offset().top,

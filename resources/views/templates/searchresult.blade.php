@@ -1,4 +1,14 @@
 <div class="row" id="searchResults">
+
+    @unless(empty($data))
+    <div class="col-12">
+        <div class="h-80 p-5 text-white bg-secondary text-center rounded-3 my-4">
+            <h2 class="display-6">BANNER</h2>
+        </div>
+    </div>
+    @endunless
+
+
     <div class="col">
     @if(!empty($fill['btnSearch']))
         <div class="row">
@@ -28,7 +38,7 @@
                     {{ $data->onEachSide(1)->links() }}
                 </div>
                 @foreach($data as $item)
-                <div class="list-group">
+                <div class="list-group overflow-hidden">
                     @include('templates.searchitem')
                 </div>
                 @endforeach

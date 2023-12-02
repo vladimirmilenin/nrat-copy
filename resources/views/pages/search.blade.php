@@ -14,26 +14,20 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-7 col-lg-8 overflow-hidden">
-            <div class="accordion accordion-flush" id="accordionSearchPanels">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelFormalizedSearch-open">
-                        <button @class(['accordion-button fw-bold', 'collapsed' => !Cookie::has('panelFormalizedSearch')])  type="button" data-bs-toggle="collapse" data-bs-target="#panelFormalizedSearch" aria-expanded="true" aria-controls="panelFormalizedSearch">
-                            {{ __('app.search_heading_formalized') }}
-                        </button>
-                    </h2>
-                    <div id="panelFormalizedSearch" @class(["accordion-collapse collapse", 'show' => Cookie::has('panelFormalizedSearch')]) aria-labelledby="panelFormalizedSearch-open">
-                        <div class="accordion-body px-0">
+        <div id="mainSide" class="col-md-7 col-lg-8 overflow-hidden">
+            <div id="tabContainer mb-4">
+                    <ul class="nav nav-pills mb-3" id="formTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button @class(['nav-link', 'active' => Cookie::has('panelFormalizedSearch')])  id="panelFormalizedSearch" data-bs-toggle="tab" data-bs-target="#formalized-tab" type="button" role="tab" aria-controls="formalized-tab" aria-selected="true">{{ __('app.search_heading_formalized') }}</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button @class(['nav-link', 'active' =>  Cookie::has('panelAdvancedSearch')]) id="panelAdvancedSearch" data-bs-toggle="tab" data-bs-target="#advanced-tab" type="button" role="tab" aria-controls="advanced-tab" aria-selected="false">{{ __('app.search_heading_advanced') }}</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="formTabContent">
+                        <div @class(["tab-pane fade", "show active" => Cookie::has('panelFormalizedSearch')]) id="formalized-tab" role="tabpanel" aria-labelledby="panelFormalizedSearch">
                             <form method="GET" id="formalizedSearchForm">
                                 @csrf
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="searchType" id="searchType">
-                                        @foreach (__('app.search_document_types') as $key => $type)
-                                            <option value="{{ $key }}" @selected((old('searchType') ?? $fill['searchType'] ?? 'ok') == $key)>{{ $type }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="searchType">{{ __('app.search_label_document_type') }}</label>
-                                </div>
                                 <div class="form-floating mb-3">
                                     <input name="searchAuthor" id="searchAuthor" class="form-control @error('Author') is-invalid @enderror" type="text" value="{{ old('searchAuthor') ?? $fill['searchAuthor'] ?? '' }}" placeholder="{{ __('app.search_label_person_name') }}">
                                     @error("Author")
@@ -61,6 +55,14 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <label for="searchRegNo">{{ __('app.search_label_regno') }}</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="searchType" id="searchType">
+                                        @foreach (__('app.search_document_types') as $key => $type)
+                                            <option value="{{ $key }}" @selected((old('searchType') ?? $fill['searchType'] ?? 'ok') == $key)>{{ $type }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="searchType">{{ __('app.search_label_document_type') }}</label>
                                 </div>
                                 <div class="row g-md-2">
                                     <div class="col-md mb-3">
@@ -91,29 +93,20 @@
                                     <label for="sortOrder">{{ __('app.search_label_sort') }}</label>
                                 </div>
                                 <div class="row g-md-2">
-                                    <div class="col-md mb-3">
+                                    <div class="col-md mb-3 order-md-last">
                                         <div class="form-floating d-grid">
-                                            <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
+                                            <button class="btn btn-primary btn-lg" type="submit" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
                                         </div>
                                     </div>
                                     <div class="col-md mb-3">
                                         <div class="form-floating d-grid">
-                                            <button class="btn btn-primary" type="submit" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
+                                            <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary btn-lg" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelAdvancedSearch-open">
-                        <button @class(['accordion-button fw-bold', 'collapsed' => !Cookie::has('panelAdvancedSearch')]) type="button" data-bs-toggle="collapse" data-bs-target="#panelAdvancedSearch" aria-expanded="false" aria-controls="panelAdvancedSearch">
-                            {{ __('app.search_heading_advanced') }}
-                        </button>
-                    </h2>
-                    <div id="panelAdvancedSearch" @class(["accordion-collapse collapse", 'show' => Cookie::has('panelAdvancedSearch')]) aria-labelledby="panelAdvancedSearch-open">
-                        <div class="accordion-body px-0">
+                        <div @class(["tab-pane fade", "show active" => Cookie::has('panelAdvancedSearch')]) id="advanced-tab" role="tabpanel" aria-labelledby="panelAdvancedSearch">
                             <form method="GET" id="advancedSearchForm" data-submit-allowed="0">
                                 @csrf
                                 <input type="hidden" name="sortOrder" value="score">
@@ -142,15 +135,17 @@
                                 </div>
                                 @endunless
 
-                                <div class="row g-md-2">
-                                    <div class="col-md mb-3">
-                                        <div class="form-floating d-grid">
-                                            <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
+                                <div id="formButtons">
+                                    <div class="row g-md-2">
+                                        <div class="col-md mb-3 order-md-last">
+                                            <div class="form-floating d-grid">
+                                                <button class="btn btn-primary btn-lg" type="submit" id="advancedSubmitButton" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md mb-3">
-                                        <div class="form-floating d-grid">
-                                            <button class="btn btn-primary" type="submit" id="advancedSubmitButton" name="btnSearch" value="1">{{ __('app.search_button_search') }}</button>
+                                        <div class="col-md mb-3">
+                                            <div class="form-floating d-grid">
+                                                <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary btn-lg" name="btnClear" value="1">{{ __('app.search_button_clear') }}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,15 +153,11 @@
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
+            </div><!-- tabContainer -->
 
-
-
-
+            @include('templates.searchresult')
 
         </div>
-
 
         @include('templates.aside')
 
@@ -175,7 +166,7 @@
 
 
 
-    @include('templates.searchresult')
+
 
 
 

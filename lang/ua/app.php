@@ -6,7 +6,7 @@ return [
     'locale_version_code' => 'en',
     'work_locale_version' => 'English version',
 
-    'placeholder_search' => 'Пошук',
+    'placeholder_search' => 'Фраза для пошуку',
 
     'caption_okd_research_for' => 'Дисертація на здобуття ступеня ',
     'caption_okd_type_research' => [
@@ -99,8 +99,8 @@ return [
         'persons.person_names.name_full' => 'Науковці',
         'full_texts.full_text' => 'Повний текст',
         'description.description_text' => 'Назва, реферат/анотація',
-    ]
+    ],
 
-
+    'start_by_searching' => 'Почніть роботу з пошуку',
 
 ];

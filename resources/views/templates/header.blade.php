@@ -3,8 +3,13 @@
         <a href="{{ route('index', ['lang' => app()->getLocale() ]) }}" class="mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
             <img class="logo" src="{{ Vite::asset('resources/images/logo_' . app()->getLocale() . '.webp') }}" alt="{{ __('app.app_title') }}" width="297" height="82">
         </a>
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 align-middle">
-            <input type="search" class="form-control align-middle" placeholder="{{ __('app.placeholder_search') }}..." aria-label="Search">
+        <form method="GET" id="headerSearchForm" action="{{ route('search', ['lang' => app()->getLocale()]) }}" class="col-12 col-lg-auto mb-3 mb-lg-0 align-middle">
+            @csrf
+            <input type="hidden" name="sortOrder" value="score">
+            <div class="input-group">
+                <input type="text" name="searchFilter[]" class="search-input form-control" placeholder="{{ __('app.placeholder_search') }}..." aria-label="{{ __('app.placeholder_search') }}">
+                <button class="btn btn-outline-secondary" name="btnSearch" type="submit" id="headerSearchButton">{{ __('app.search_button_search') }}</button>
+            </div>
         </form>
     </div>
 </header>

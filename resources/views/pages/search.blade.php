@@ -18,10 +18,10 @@
             <div id="tabContainer">
                     <ul class="nav nav-pills mb-3" id="formTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button @class(['nav-link', 'active' => Cookie::has('panelFormalizedSearch')])  id="panelFormalizedSearch" data-bs-toggle="tab" data-bs-target="#formalized-tab" type="button" role="tab" aria-controls="formalized-tab" aria-selected="true">{{ __('app.search_heading_formalized') }}</button>
+                            <button @class(['nav-link', 'active' =>  Cookie::has('panelAdvancedSearch')]) id="panelAdvancedSearch" data-bs-toggle="tab" data-bs-target="#advanced-tab" type="button" role="tab" aria-controls="advanced-tab" aria-selected="false">{{ __('app.search_heading_advanced') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button @class(['nav-link', 'active' =>  Cookie::has('panelAdvancedSearch')]) id="panelAdvancedSearch" data-bs-toggle="tab" data-bs-target="#advanced-tab" type="button" role="tab" aria-controls="advanced-tab" aria-selected="false">{{ __('app.search_heading_advanced') }}</button>
+                            <button @class(['nav-link', 'active' => Cookie::has('panelFormalizedSearch')])  id="panelFormalizedSearch" data-bs-toggle="tab" data-bs-target="#formalized-tab" type="button" role="tab" aria-controls="formalized-tab" aria-selected="true">{{ __('app.search_heading_formalized') }}</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="formTabContent">

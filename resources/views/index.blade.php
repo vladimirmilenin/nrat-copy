@@ -29,10 +29,15 @@
             <h1 class="display-5 fw-bold">{{ __('app.index_welcome_header') }}</h1>
             <div class="col-md-10">
                 {!! __('app.index_text_1') !!}
-                <p class="fs-5">{{ __('app.index_text_2') }}</p>
+                {{-- <p class="fs-5">{{ __('app.index_text_2') }}</p> --}}
+                <p class="fs-5 fw-bold mb-2">{{ __('app.start_by_searching') }}</p>
             </div>
-            <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a>
-            {{-- <a href="#!" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a> --}}
+
+            <div class="col-12">
+                @include('templates.mainsearch')
+            </div>
+
+            {{-- <a href="{{ route('search', ['lang' => app()->getLocale()]) }}" class="btn btn-secondary px-4 btn-lg" type="button">{{ __('app.button_search') }}</a> --}}
         </div>
     </div>
 

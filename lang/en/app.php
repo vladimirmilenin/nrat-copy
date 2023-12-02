@@ -7,7 +7,7 @@ return [
     'locale_version_code' => 'ua',
     'work_locale_version' => 'Українська версія',
 
-    'placeholder_search' => 'Search',
+    'placeholder_search' => 'Search phrase',
 
     'caption_okd_research_for' => 'Thesis for the degree of ',
     'caption_okd_type_research' => [
@@ -100,6 +100,8 @@ return [
         'persons.person_names.name_full' => 'Scientists',
         'full_texts.full_text' => 'Full text',
         'description.description_text' => 'Document title, essay',
-    ]
+    ],
+
+    'start_by_searching' => 'Start your search',
 
 ];

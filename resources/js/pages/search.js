@@ -1,6 +1,6 @@
 $(function(){
 
-    if ($('input[name="searchFilter[]"]').length > 1){
+    if ($('#advancedSearchForm input[name="searchFilter[]"]').length > 1){
         Cookies.remove('panelFormalizedSearch');
         $('#panelFormalizedSearch, #formalized-tab').removeClass('active');
         $('#formalized-tab').removeClass('show');
@@ -11,12 +11,12 @@ $(function(){
     }
 
     if (Cookies.get('panelFormalizedSearch') == undefined && Cookies.get('panelAdvancedSearch') == undefined){
-        Cookies.set('panelFormalizedSearch', '1');
-        $('#panelFormalizedSearch, #formalized-tab').addClass('active');
-        $('#formalized-tab').addClass('show');
-        $('#panelAdvancedSearch, #advanced-tab').removeClass('active');
-        $('#advanced-tab').removeClass('show');
+        Cookies.set('panelAdvancedSearch', '1');
+        $('#panelAdvancedSearch, #advanced-tab').addClass('active');
+        $('#advanced-tab').addClass('show');
 
+        $('#panelFormalizedSearch, #formalized-tab').removeClass('active');
+        $('#formalized-tab').removeClass('show');
     }
 
     $('#tabContainer button[data-bs-toggle="tab"]').on('shown.bs.tab', function(){

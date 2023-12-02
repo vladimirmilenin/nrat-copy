@@ -15,8 +15,7 @@ $(window).on('load', function(){
 import Cookies from 'js-cookie';
 window.Cookies = Cookies;
 
-
-
+import './main';
 
 // document.addEventListener('DOMContentLoaded', function () {
     // init lightslider

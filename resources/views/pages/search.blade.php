@@ -26,7 +26,7 @@
                     </ul>
                     <div class="tab-content" id="formTabContent">
                         <div @class(["tab-pane fade", "show active" => Cookie::has('panelAdvancedSearch')]) id="advanced-tab" role="tabpanel" aria-labelledby="panelAdvancedSearch">
-                            <form method="GET" id="advancedSearchForm" data-submit-allowed="0">
+                            <form method="GET" id="advancedSearchForm">
                                 @csrf
                                 <input type="hidden" name="sortOrder" value="score">
                                 <input type="hidden" name="searchType" value="okd">

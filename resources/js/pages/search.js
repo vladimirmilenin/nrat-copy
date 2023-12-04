@@ -67,16 +67,16 @@ $(function(){
 
     $('.remove-input').on('click', function () {
         $(this).parent().remove();
-        $advancedSearchForm.data('submit-allowed', 1);
         $('#advancedSubmitButton').trigger('click');
     });
 
     $advancedSearchForm.on('submit', function (e) {
-        if (!$(this).data('submit-allowed') && $("#lastField").val().trim() == ''){
+        if ($('#advancedSearchForm input[name="searchFilter[]"]').length <= 1 && $("#lastField").val().trim() == ''){
             e.preventDefault();
         }
     });
 });
+
 
 
 $(function(){

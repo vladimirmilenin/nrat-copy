@@ -39,7 +39,7 @@ class SearchController extends Controller
         if (empty($this->query[$field])){
             return false;
         }
-        $validator = Validator::make([$field => $value], [$field => $this->query[$field]['validate'], 'Filter.*' => 'nullable|string|min:3'], __('validation.customMessages'));
+    $validator = Validator::make([$field => $value], [$field => $this->query[$field]['validate'] /*, 'Filter.*' => 'nullable|string|min:3' */], __('validation.customMessages'));
         if ($validator->fails()){
             return ['result' => false, 'errors' => $validator->errors()];
         }
@@ -70,14 +70,14 @@ class SearchController extends Controller
     }
 
     private function doSearch(Request $request){
+        if ($request->has('searchFilter')){
+            $arr = array_filter($request->input('searchFilter', []), fn($el) => !empty($el));
+            $request->merge(['searchFilter' => $arr]);
+        }
         $fill = array_merge(
             $this->clearForm,
             array_map((fn($el) => empty($el) ? '' : $el), $request->all())
         );
-        if ($request->has('searchFilter')){
-            $arr = array_filter($request->input('searchFilter', []), fn($el) => !empty($el));
-            $fill = array_merge($fill, ['searchFilter' => $arr]);
-        }
         $hosts = config('database.connections.elasticsearch.hosts');
         $client = ClientBuilder::create()
             ->setBasicAuthentication(

@@ -1,11 +1,13 @@
 <div class="row" id="searchResults">
 
     @unless(empty($data))
+    {{-- 
     <div class="col-12">
         <div class="h-80 p-5 text-white bg-secondary text-center rounded-3 my-4">
-            <h2 class="display-6">BANNER</h2>
+            <h2 class="display-6">BANNER</h2> 
         </div>
     </div>
+    --}}
     @endunless
 
 

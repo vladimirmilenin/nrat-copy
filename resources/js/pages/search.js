@@ -1,22 +1,31 @@
 $(function(){
 
-    if ($('#advancedSearchForm input[name="searchFilter[]"]').length > 1){
-        Cookies.remove('panelFormalizedSearch');
-        $('#panelFormalizedSearch, #formalized-tab').removeClass('active');
-        $('#formalized-tab').removeClass('show');
+    function setDefaultSearchPanel($default_panel){
+        if ($default_panel == 'advanced'){
+            Cookies.remove('panelFormalizedSearch');
+            $('#panelFormalizedSearch').removeClass('active');
+            $('#formalized-tab').removeClass('active show');
 
-        Cookies.set('panelAdvancedSearch', '1');
-        $('#panelAdvancedSearch, #advanced-tab').addClass('active');
-        $('#advanced-tab').addClass('show');
+            Cookies.set('panelAdvancedSearch', '1');
+            $('#panelAdvancedSearch').addClass('active');
+            $('#advanced-tab').addClass('active show');
+        } else {
+            Cookies.remove('panelAdvancedSearch');
+            $('#panelAdvancedSearch').removeClass('active');
+            $('#advanced-tab').removeClass('active show');
+
+            Cookies.set('panelFormalizedSearch', '1');
+            $('#panelFormalizedSearch').addClass('active');
+            $('#formalized-tab').addClass('active show');
+        }
+    }
+
+    if ($('#advancedSearchForm input[name="searchFilter[]"]').length > 1){
+        setDefaultSearchPanel('advanced');
     }
 
     if (Cookies.get('panelFormalizedSearch') == undefined && Cookies.get('panelAdvancedSearch') == undefined){
-        Cookies.set('panelAdvancedSearch', '1');
-        $('#panelAdvancedSearch, #advanced-tab').addClass('active');
-        $('#advanced-tab').addClass('show');
-
-        $('#panelFormalizedSearch, #formalized-tab').removeClass('active');
-        $('#formalized-tab').removeClass('show');
+        setDefaultSearchPanel('formalized');
     }
 
     $('#tabContainer button[data-bs-toggle="tab"]').on('shown.bs.tab', function(){

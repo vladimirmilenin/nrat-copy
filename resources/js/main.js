@@ -7,8 +7,9 @@ import jQuery from 'jquery';
     /** Search Trick */
     $("#headerSearchForm, #mainSearchForm").on('submit', function(e){
         const $input = $(this).find('.search-input');
-        if ($input.val().trim().length < 3){
+        if ($input.val().trim().length == 0){
             e.preventDefault();
+            document.location.href = $("#headerSearchForm").attr('action');
         }
     });
 

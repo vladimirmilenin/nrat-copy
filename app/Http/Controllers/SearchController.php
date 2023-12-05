@@ -39,7 +39,7 @@ class SearchController extends Controller
         if (empty($this->query[$field])){
             return false;
         }
-    $validator = Validator::make([$field => $value], [$field => $this->query[$field]['validate'] /*, 'Filter.*' => 'nullable|string|min:3' */], __('validation.customMessages'));
+        $validator = Validator::make([$field => $value], [$field => $this->query[$field]['validate'] /*, 'Filter.*' => 'nullable|string|min:3' */], __('validation.customMessages'));
         if ($validator->fails()){
             return ['result' => false, 'errors' => $validator->errors()];
         }
@@ -95,7 +95,8 @@ class SearchController extends Controller
             if (!$tmp)
                 continue;
             if (!$tmp['result']) {
-                return redirect()->back()->withErrors($tmp['errors'])->withInput($request->input());
+                return redirect()->route('search', ['lang' => app()->getLocale()])->withInput($request->input())->withErrors($tmp['errors']);
+                // return redirect()->back()->withErrors($tmp['errors'])->withInput($request->input());
             }
             if (isset($tmp['query']['must']))
                 $must[] = $tmp['query']['must'];

@@ -88,6 +88,7 @@ return [
     ],
     'search_label_search_text' => 'Текст для пошуку',
     'search_button_search' => 'Шукати',
+    'search_link_search' => 'Пошук',
     'search_button_clear' => 'Очистити форму',
 
     'search_result_header' => 'Результати пошуку',

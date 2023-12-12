@@ -2,6 +2,12 @@
 /* EN */
 return [
 
+    'menu' => [
+        'home' => 'Home',
+        'direction' => 'Scientific programs',
+        'search' => 'Search',
+    ],
+
     'app_title' => 'Academic Texts of Ukraine',
     'locale_version' => 'Українська версія',
     'locale_version_code' => 'ua',
@@ -103,5 +109,12 @@ return [
     ],
 
     'start_by_searching' => 'Start your search',
+
+    'directions_title' => 'PhD degrees. PhD programs. Academic texts of Ukraine: theses, reports, articles, monographs - uacademic.info',
+    'directions_description' => 'PhD degrees, PhD programs, doctor programs. Access to scientific works for scientists and researchers',
+    'directions_keywords' => 'PhD degrees, PhD programs, doctor programs, thesis, full text, abstract, theses :year, academic texts, download thesis, thesis abstract, scientific texts, uacademic',
+
+    'directions_heading_1' => 'PhD programs',
+    'directions_heading_2' => 'Doctor programs',
 
 ];

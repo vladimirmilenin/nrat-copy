@@ -5,7 +5,7 @@ use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
-use Psy\VersionUpdater\Downloader\FileDownloader;
+use App\Http\Controllers\DirectionController;
 
 Route::prefix('{lang}')
 ->whereIn('lang', ['ua', 'en'])
@@ -14,6 +14,7 @@ Route::prefix('{lang}')
     Route::get('/', IndexController::class)->name('index');
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::get('/direction/{code?}', DirectionController::class)->name('direction');
     // Route::get('/foo', [SearchController::class, 'index'])->name('search');
 
     Route::get('/document/{registrationNumber}', DocumentController::class)->middleware('check.regnumber')->name('document');

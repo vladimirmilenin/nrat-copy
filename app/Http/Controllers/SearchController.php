@@ -113,6 +113,32 @@ class SearchController extends Controller
             $m = array_merge($m, $list);
         $should = $m;
 
+        /*****   filter records type ********/
+        $searchType = $request->input('searchType','all');
+        if (!in_array($searchType,['all','okd','ok']))
+            $searchType='all';
+        if ($searchType=='okd')
+            $must[] = [
+                    "bool"=> [
+                        "should"=> [
+                            [ "term"=>["record_type"=>4]],
+                            [ "term"=>["record_type"=>5]],
+                            [ "term"=>["record_type"=>8]]
+                        ]
+                    ]
+                ];
+        else if ($searchType=='ok')
+            $must[] = [
+                    "bool"=> [
+                        "should"=> [
+                            [ "term"=>["record_type"=>2]],
+                            [ "term"=>["record_type"=>3]],
+                        ]
+                    ]
+                ];
+        /***************************************/
+
+
         $sort = $request->input('sortOrder', 'registration_date');
         if (!isset($this->sort[$sort])){
             $sort = $this->sort['registration_number'];

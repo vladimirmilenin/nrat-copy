@@ -1,5 +1,5 @@
 @unless(empty($registrationNumber))
-<a href="{{ $url }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+<a href="{{ $url }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" @unless (empty($target)) target={{ $target }} @endunless aria-current="true">
     <x-bi-link-45deg class="w-8 h-8 text-primary opacity-75"/>
     <div class="d-flex gap-2 w-100 justify-content-between">
         <div>

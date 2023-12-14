@@ -12,12 +12,10 @@ class DirectionController extends Controller
 
     private $lang;
 
-    public function __construct(){
-        $this->lang = app()->getLocale();
-    }
 
     public function __invoke(Request $request){
-        $lang = $this->lang;
+        $lang = $this->lang = app()->getLocale();
+        // $lang = $this->lang;
         $code = $request->code ?? null;
         if (empty($code)){
             $directions = $this->getAllDirections();

@@ -1,20 +1,23 @@
+@php
+    $currentRouteName = !empty(Route::current()) ? (Route::current()->getName()) : '';
+@endphp
 <header class="pb-2 mb-4 border-bottom">
     <div class="container d-flex flex-wrap align-items-center justify-content-center border-bottom">
         <ul class="nav col-12 col-md-auto my-2 justify-content-center my-md-0">
             <li><a href="{{ route('index', ['lang' => app()->getLocale()]) }}" @class([
                 'nav-link px-2',
-                'link-secondary' => in_array(Route::current()->getName(), ['home', 'index']),
-                'link-dark' => !in_array(Route::current()->getName(), ['home', 'index']),
+                'link-secondary' => in_array($currentRouteName, ['home', 'index']),
+                'link-dark' => !in_array($currentRouteName, ['home', 'index']),
                 ])>{{ __('app.menu.home') }}</a></li>
             <li><a href="{{ route('direction', ['lang' => app()->getLocale()]) }}" @class([
                 'nav-link px-2',
-                'link-secondary' => Route::current()->getName() == 'direction',
-                'link-dark' => Route::current()->getName() !== 'direction',
+                'link-secondary' => $currentRouteName == 'direction',
+                'link-dark' => $currentRouteName !== 'direction',
             ])>{{ __('app.menu.direction') }}</a></li>
             <li><a href="{{ route('search', ['lang' => app()->getLocale()]) }}" @class([
                 'nav-link px-2',
-                'link-secondary' => Route::current()->getName() == 'search',
-                'link-dark' => Route::current()->getName() !== 'search',
+                'link-secondary' => $currentRouteName == 'search',
+                'link-dark' => $currentRouteName !== 'search',
             ])>{{ __('app.menu.search') }}</a></li>
           </ul>
     </div>

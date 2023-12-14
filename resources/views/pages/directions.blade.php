@@ -34,7 +34,7 @@
                 {{ $records->links() }}
             @else
                 {{-- Directions list only --}}
-                <!-- PhD -->
+                <!-- VAK -->
                 <div class="row">
                     <h2 class="h1 mb-4">{{ __('app.directions_heading_2') }}</h2>
                     @foreach ($directions['vak'] ?? [] as $item)
@@ -45,7 +45,7 @@
                     </p>
                     @endforeach
                 </div>
-                <!-- VAK -->
+                <!-- PhD -->
                 <div class="row">
                     <h1 class="h1 my-4">{{ __('app.directions_heading_1') }}</h1>
                     @foreach ($directions['phD'] ?? [] as $item)
